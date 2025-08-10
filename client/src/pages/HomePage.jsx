@@ -1,60 +1,43 @@
 import { useState } from "react";
 import "../styles/pages/homepage.css";
 import { FaTools } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { TbClockPin } from "react-icons/tb";
 import { GrUserExpert } from "react-icons/gr";
 import { MdOutlinePriceCheck } from "react-icons/md";
 
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
+import faqImg from "../assets/faq-image.png";
 import heroImage from "../assets/hero-img.png";
-import faqImg from "../assets/faq-new-removebg-preview.png";
 import serviceImg from "../assets/service-img.jpeg";
 import contactImg from "../assets/contact-img.jpeg";
 
-const HomePage = () => {
-  const services = useSelector((state) => state.services.services);
-  const [contactText, setContactText] = useState("");
-  const [toggleActiveButton, setToggleActiveButton] = useState(true);
+import { services, faqs } from "../utils/constants";
 
+const HomePage = () => {
+  // STATES
+  const [contactText, setContactText] = useState("");
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [toggleActiveContactButton, setToggleActiveContactButton] = useState(true);
+
+  // FUNCTIONS
   const handleServiceClick = (e) => {
     console.log(e.target.id);
+  };
+
+  const toggleFAQ = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   const handleContactSubmit = () => {
     console.log("Text Entered:", contactText);
     setContactText("");
     console.log(window.scrollY);
-  };
-
-  const faqs = [
-    {
-      question: "What does each service include?",
-      answer:
-        "Each service comes with a detailed breakdown of deliverables, timelines, and cost.",
-    },
-    {
-      question: "How long does it take to complete a service?",
-      answer:
-        "Completion time varies per service, but most are delivered within 5-7 business days.",
-    },
-    {
-      question: "Can I customize the service according to my needs?",
-      answer: "Yes, we offer customization options for all services.",
-    },
-    {
-      question: "What does each service include?",
-      answer:
-        "Each service comes with a detailed breakdown of deliverables, timelines, and cost." +
-        "Each service comes with a detailed ",
-    },
-  ];
-
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
@@ -81,13 +64,10 @@ const HomePage = () => {
         <span className="about-details">
           <h1>Our Services</h1>
           <p>
-            We offer a complete range of professional household services, <br />
+            We offer a complete range of professional household services,
             ensuring your home stays in top condition. Whether it’s repairs,{" "}
-            <br />
             installations, or maintenance, our verified experts provide fast,
-            reliable,
-            <br />
-            and affordable solutions.
+            reliable, and affordable solutions.
           </p>
           <img className="service-image" src={serviceImg} alt="service-img" />
         </span>
@@ -146,7 +126,7 @@ const HomePage = () => {
             className="service-item"
             onClick={handleServiceClick}
           >
-            <h3 id={id}>{id +". "+ title}</h3>
+            <h3 id={id}>{id + ". " + title}</h3>
             <ul>
               {sub.map((item, i) => (
                 <li key={i} id={id}>
@@ -166,7 +146,7 @@ const HomePage = () => {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className={`faq-item ${openIndex === index ? "open" : ""}`}
+              className={`faq-item ${openFaqIndex === index ? "open" : ""}`}
             >
               <h3 onClick={() => toggleFAQ(index)}>Q. {faq.question}</h3>
               <div className="faq-answer">
@@ -175,7 +155,7 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-        
+
         <img className="faq-image" src={faqImg} alt="faq-image" />
       </div>
 
@@ -188,14 +168,14 @@ const HomePage = () => {
           <div className="input-box">
             <div className="input-types">
               <button
-                className={toggleActiveButton ? "active-btn" : ""}
-                onClick={() => setToggleActiveButton(true)}
+                className={toggleActiveContactButton ? "active-btn" : ""}
+                onClick={() => setToggleActiveContactButton(true)}
               >
                 FeedBack
               </button>
               <button
-                className={!toggleActiveButton ? "active-btn" : ""}
-                onClick={() => setToggleActiveButton(false)}
+                className={!toggleActiveContactButton ? "active-btn" : ""}
+                onClick={() => setToggleActiveContactButton(false)}
               >
                 Complaint
               </button>
@@ -279,7 +259,10 @@ const HomePage = () => {
         {/* Bottom */}
         <div className="footer-bottom">
           © {new Date().getFullYear()} PrimeFix. All Rights Reserved. <br />
-          create by <a className="name-link" href="#">Deepanshu</a>
+          create by{" "}
+          <a className="name-link" href="#">
+            Deepanshu
+          </a>
         </div>
       </footer>
     </div>

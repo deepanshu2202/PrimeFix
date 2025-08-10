@@ -5,7 +5,7 @@
 /* <======================== HERO SECTION =====================> */
 
 .hero-section {
-  height: 90vh;
+  /* height: 90vh; */
   padding: 0.8rem;
 
   font-size: 1.5rem;
@@ -27,7 +27,7 @@
 /* <======================== ABOUT SECTION =====================> */
 
 .about-section {
-  height: 90vh;
+  /* height: 90vh; */
   padding: 1.5rem;
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@
 }
 
 .about-cards div {
-  height: 35vh;
+  /* height: 35vh; */
   width: 22vw;
   border-radius: 1rem;
   display: flex;
@@ -351,4 +351,108 @@
 
 .name-link {
   color: white;
+}
+
+/* <======================== RESPONSIVENESS =====================> */
+@media (max-width: 540px) {
+  .hero-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-details {
+    text-align: left;
+  }
+
+  .about-cards {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .about-cards div {
+    width: 80%;
+  }
+
+  .service-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    width: 100%;
+  }
+
+  .faq-image {
+    display: none;
+  }
+
+  .contact-section-bottom {
+    flex-direction: column;
+  }
+
+  .input-box textarea {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 541px) and (max-width: 800px) {
+  .hero-section {
+    flex-direction: column;
+  }
+
+  .about-section {
+    flex-direction: column;
+  }
+
+  .about-cards div {
+    width: 100%;
+  }
+
+  .service-section {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, auto);
+  }
+
+  .faq-image {
+    display: none;
+  }
+
+  .contact-section-bottom {
+    flex-direction: column;
+  }
+
+  .input-box textarea {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 900px) {
+  .about-details p {
+    padding: 0.5rem;
+    text-align: start;
+  }
+
+  .faq-image {
+    display: none;
+  }
+
+  .contact-section-bottom {
+    flex-direction: column;
+  }
+
+  .input-box textarea {
+    width: 80vw;
+  }
 }

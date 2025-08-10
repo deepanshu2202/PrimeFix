@@ -54,8 +54,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .profile-menu div {
@@ -82,8 +88,6 @@
   width: 150px;
 
   font-size: 1.5rem;
-  border-left: 1px solid white;
-  border-top: 1px solid white;
   background-color: inherit;
   display: flex;
   flex-direction: column;
@@ -98,19 +102,17 @@
   width: 100%;
 }
 
-.nav-action-mobile-btn, .mobile-logout-btn {
+.nav-action-mobile-btn,
+.mobile-logout-btn {
   cursor: pointer;
   padding: 0.5rem;
 }
 
-.mobile-logout-btn:hover, .nav-action-mobile-btn:hover {
+.mobile-logout-btn:hover,
+.nav-action-mobile-btn:hover {
   background-color: #335075;
 }
 
 .nav-actions-mobile.open {
   right: 0px;
-}
-
-@media (max-width: 580px) { /* This style will be applied if the width is less than 1000px */
-  
 }
