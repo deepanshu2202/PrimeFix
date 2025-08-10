@@ -1,0 +1,52 @@
+# Root-level dependencies or build artifacts (if any)
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+*.log
+
+# Ignore logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore OS-specific files
+Thumbs.db
+ehthumbs.db
+
+# Admin-side (React)
+admin/node_modules/
+admin/.env
+admin/.DS_Store
+admin/build/
+admin/.next/
+admin/.vite/
+admin/dist/
+
+# Client-side (React)
+client/node_modules/
+client/.env
+client/.DS_Store
+client/build/
+client/.next/
+client/.vite/
+client/dist/
+
+# Server-side (Node.js / Express)
+server/node_modules/
+server/.env
+server/.DS_Store
+server/logs/
+server/debug.log
+server/dist/
+server/uploads/
+server/coverage/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Socket.IO 
+*.sock

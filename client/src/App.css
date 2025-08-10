@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap");
+
+:root {
+  --primary-bg: #3d5a80;
+  --dark-bg: #0d1b2a;
+  --gray-bg: #f1f1f1;
+  --yellow-bg: #ffcc00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Varela Round", sans-serif;
+  font-style: normal;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
