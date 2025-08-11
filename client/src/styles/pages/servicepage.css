@@ -1,0 +1,95 @@
+/* Root container */
+.servicepage-root {
+  /* max-width: 800px; */
+  margin: 40px auto;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.servicepage-root {
+    margin-top: 12vh;
+}
+
+/* Form styling */
+.servicepage-root form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Labels */
+.servicepage-root label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+/* Inputs & textarea */
+.servicepage-root input,
+.servicepage-root textarea {
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background-color: white;
+}
+
+.servicepage-root input:focus,
+.servicepage-root textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Checkbox alignment */
+.address-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Two-column layout for city/pincode and state/country */
+.servicepage-root div {
+  display: flex;
+  gap: 16px;
+}
+
+.servicepage-root div label {
+  flex: 1;
+}
+
+/* File upload styling */
+.service-image input[type="file"] {
+  padding: 6px;
+  border: none;
+}
+
+/* Submit button */
+.submit-btn {
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 580px) {
+  .servicepage-root div {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
