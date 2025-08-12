@@ -1,22 +1,27 @@
 /* Root container */
 .servicepage-root {
-  /* max-width: 800px; */
-  margin: 40px auto;
-  padding: 20px;
+  width: 100%;
+  padding: 1rem 0 1rem 1rem;
   background: #f8f9fa;
-  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .servicepage-root {
-    margin-top: 12vh;
+    margin-top: 11vh;
+    /* background-color: var(--primary-bg); */
+
+  background-color: #3d526d;
 }
 
 /* Form styling */
 .servicepage-root form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  max-width: 50vw;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 1rem;
+  background-color: var(--gray-bg);
 }
 
 /* Labels */
@@ -48,9 +53,14 @@
 
 /* Checkbox alignment */
 .address-checkbox {
-  flex-direction: row;
+  display: flex;
+  flex-direction: row !important;
   align-items: center;
   gap: 8px;
+}
+
+.address-checkbox input {
+  margin: 0;
 }
 
 /* Two-column layout for city/pincode and state/country */
@@ -64,15 +74,17 @@
 }
 
 /* File upload styling */
-.service-image input[type="file"] {
+.service-image {
   padding: 6px;
   border: none;
+  display: none;
+  height: fit-content;
 }
 
 /* Submit button */
 .submit-btn {
   padding: 12px;
-  background: #007bff;
+  background: var(--primary-bg);
   color: white;
   border: none;
   border-radius: 6px;
@@ -83,11 +95,11 @@
 }
 
 .submit-btn:hover {
-  background: #0056b3;
+  background: #283e5a;
 }
 
 /* Responsive design */
-@media (max-width: 580px) {
+@media (max-width: 900px) {
   .servicepage-root div {
     flex-direction: column;
     gap: 10px;
