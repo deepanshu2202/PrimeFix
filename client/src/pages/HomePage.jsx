@@ -18,16 +18,18 @@ import serviceImg from "../assets/service-img.jpeg";
 import contactImg from "../assets/contact-img.jpeg";
 
 import { services, faqs } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   // STATES
   const [contactText, setContactText] = useState("");
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [toggleActiveContactButton, setToggleActiveContactButton] = useState(true);
 
   // FUNCTIONS
-  const handleServiceClick = (e) => {
-    console.log(e.target.id);
+  const handleServiceClick = () => {
+    navigate('/service');
   };
 
   const toggleFAQ = (index) => {

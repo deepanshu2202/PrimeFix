@@ -52,7 +52,7 @@ const router = createBrowserRouter([
     path:'/service',
     element:(
       <>
-        <Navbar />
+        <Navbar /> 
         <ServicePage />
       </>
     )

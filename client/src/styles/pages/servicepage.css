@@ -1,26 +1,43 @@
 /* Root container */
 .servicepage-root {
   width: 100%;
-  padding: 1rem 0 1rem 1rem;
+  height: 89vh;
+  padding: 1rem;
   background: #f8f9fa;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.servicepage-root {
-    margin-top: 11vh;
-    /* background-color: var(--primary-bg); */
-
+  margin-top: 11vh;
   background-color: #3d526d;
 }
 
 /* Form styling */
 .servicepage-root form {
   display: flex;
-  flex-direction: column;
-  max-width: 50vw;
-  padding: 1rem;
+  width: 100%;
+  height: 100%;
   gap: 1rem;
   border-radius: 1rem;
+  background-color: #3d526d;
+}
+
+/* Service details container */
+.service-details-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  background-color: var(--gray-bg);
+  overflow-y: auto;
+}
+
+/* Service address container */
+.service-address-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.7rem;
   background-color: var(--gray-bg);
 }
 
@@ -47,15 +64,15 @@
 
 .servicepage-root input:focus,
 .servicepage-root textarea:focus {
-  border-color: #007bff;
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
 }
 
-/* Checkbox alignment */
+/* Checkbox alignment fix */
 .address-checkbox {
-  display: flex;
+  display: flex !important;
   flex-direction: row !important;
   align-items: center;
+  width: fit-content;
   gap: 8px;
 }
 
@@ -81,6 +98,10 @@
   height: fit-content;
 }
 
+.images-preview-container {
+  height: fit-content;
+}
+
 /* Submit button */
 .submit-btn {
   padding: 12px;
@@ -98,10 +119,59 @@
   background: #283e5a;
 }
 
+/* Image preview container */
+.images-preview-container {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 0.4rem;
+  background-color: #fff;
+  height: 100px;
+  width: 100%;
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.servicepage-root textarea {
+  height: 40vh;
+  width: 100%;
+  resize: none;
+}
+
 /* Responsive design */
 @media (max-width: 900px) {
+  .servicepage-root {
+    height: 100%;
+  }
+
+  .servicepage-root form {
+    flex-direction: column;
+  }
+
+  .service-details-container,
+  .service-address-container {
+    width: 100%;
+    max-height: unset;
+    overflow: visible;
+  }
+
   .servicepage-root div {
     flex-direction: column;
     gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .servicepage-root {
+    height: 100%;
+    padding: 0.5rem;
+  }
+
+  .service-details-container,
+  .service-address-container {
+    padding: 0.8rem;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 10px;
   }
 }
