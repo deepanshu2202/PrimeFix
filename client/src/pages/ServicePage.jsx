@@ -1,22 +1,66 @@
+// react
 import "../styles/pages/servicepage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// redux
+import { useSelector } from "react-redux";
+
+// miscellaneous
+import { services } from "../utils/constants";
 
 const ServicePage = () => {
+  const userSavedAddress = useSelector((state) => state.user.address);
+  const selectedService = useSelector((state) => state.global.selectedService);
+
   const [userCity, setUserCity] = useState("");
   const [userState, setUserState] = useState("");
   const [checkbox, setCheckbox] = useState(false);
-  const [serviceType, setServiceType] = useState("Hello"); // to be excluded
   const [cityPincode, setCityPincode] = useState("");
   const [userAddress, setUserAddress] = useState("");
   const [userCountry, setUserCountry] = useState("");
-  const [serviceImages, setServiceImages] = useState(null); // to be modified
+  const [serviceImages, setServiceImages] = useState(null);
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [serviceDescription, setServiceDescription] = useState("");
   const [userAltPhoneNumber, setUserAltPhoneNumber] = useState("");
+  const [serviceType, setServiceType] = useState(
+    `${selectedService.id}. ${selectedService.title}`
+  );
 
+  // useEffects
+  useEffect(() => {
+    const setAddress = () => {
+      setUserCity(userSavedAddress.city);
+      setUserState(userSavedAddress.state);
+      setUserAddress(userSavedAddress.main);
+      setCityPincode(userSavedAddress.pincode);
+      setUserCountry(userSavedAddress.country);
+      setUserPhoneNumber(userSavedAddress.phone);
+      setUserAltPhoneNumber(userSavedAddress.altPhone);
+    };
+
+    const resetAddress = () => {
+      setUserCity("");
+      setUserState("");
+      setUserAddress("");
+      setCityPincode("");
+      setUserCountry("");
+      setUserPhoneNumber("");
+      setUserAltPhoneNumber("");
+    };
+
+    if (checkbox) {
+      setAddress();
+    } else {
+      resetAddress();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkbox]);
+
+  // functions
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("submitting form....");
+    console.log(userSavedAddress);
   };
 
   return (
@@ -25,12 +69,16 @@ const ServicePage = () => {
         <div className="service-details-container">
           <label className="service-type">
             Type <br />
-            <input
-              type="text"
-              value={serviceType}
+            <select
+              defaultValue={serviceType}
               onChange={(e) => setServiceType(e.target.value)}
-              readOnly={checkbox}
-            />
+            >
+              {Object.entries(services).map(([key, value]) => (
+                <option key={key} value={`${key}. ${value.title}`}>
+                  {`${key}. ${value.title}`}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label className="service-description">
@@ -38,6 +86,7 @@ const ServicePage = () => {
             <textarea
               value={serviceDescription}
               onChange={(e) => setServiceDescription(e.target.value)}
+              required
             />
           </label>
 
@@ -70,11 +119,12 @@ const ServicePage = () => {
           </label>
 
           <label className="user-address">
-            H.No/Flat No/Landmark <br />
+            H.No/Flat No/Street No/Landmark/Area <br />
             <input
               type="text"
               value={userAddress}
               onChange={(e) => setUserAddress(e.target.value)}
+              required
             />
           </label>
 
@@ -85,6 +135,7 @@ const ServicePage = () => {
                 type="text"
                 value={userCity}
                 onChange={(e) => setUserCity(e.target.value)}
+                required
               />
             </label>
             <label className="user-city-pincode">
@@ -93,6 +144,7 @@ const ServicePage = () => {
                 type="number"
                 value={cityPincode}
                 onChange={(e) => setCityPincode(e.target.value)}
+                required
               />
             </label>
           </div>
@@ -104,6 +156,7 @@ const ServicePage = () => {
                 type="text"
                 value={userState}
                 onChange={(e) => setUserState(e.target.value)}
+                required
               />
             </label>
             <label className="user-country">
@@ -112,6 +165,7 @@ const ServicePage = () => {
                 type="text"
                 value={userCountry}
                 onChange={(e) => setUserCountry(e.target.value)}
+                required
               />
             </label>
           </div>
@@ -122,11 +176,12 @@ const ServicePage = () => {
               type="tel"
               value={userPhoneNumber}
               onChange={(e) => setUserPhoneNumber(e.target.value)}
+              required
             />
           </label>
 
           <label className="user-phone-alt">
-            Alternative Phone number <br />
+            Alternate Phone number <br />
             <input
               type="tel"
               value={userAltPhoneNumber}

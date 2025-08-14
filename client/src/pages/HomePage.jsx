@@ -1,10 +1,9 @@
-import { useState } from "react";
+// react 
 import "../styles/pages/homepage.css";
-import { FaTools } from "react-icons/fa";
-import { TbClockPin } from "react-icons/tb";
-import { GrUserExpert } from "react-icons/gr";
-import { MdOutlinePriceCheck } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+// Icons
 import {
   FaFacebookF,
   FaTwitter,
@@ -12,24 +11,47 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 
+import { FaTools } from "react-icons/fa";
+import { TbClockPin } from "react-icons/tb";
+import { GrUserExpert } from "react-icons/gr";
+import { MdOutlinePriceCheck } from "react-icons/md";
+
+// Images
 import faqImg from "../assets/faq-image.png";
 import heroImage from "../assets/hero-img.png";
 import serviceImg from "../assets/service-img.jpeg";
 import contactImg from "../assets/contact-img.jpeg";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setSelectedService } from "../redux/slice/globalSlice";
+
+// Miscellaneous
 import { services, faqs } from "../utils/constants";
-import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // STATES
   const [contactText, setContactText] = useState("");
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const [toggleActiveContactButton, setToggleActiveContactButton] = useState(true);
+  const [toggleActiveContactButton, setToggleActiveContactButton] =
+    useState(true);
+
+  //useEffects
+  useEffect(() => {
+    dispatch(setSelectedService({ id: "1", title: "Plumbing Services" }));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // FUNCTIONS
-  const handleServiceClick = () => {
-    navigate('/service');
+  const handleServiceClick = (e) => {
+    const id = e.target.id;
+    const title = e.target.title;
+    dispatch(setSelectedService({ id, title }));
+    navigate("/service");
   };
 
   const toggleFAQ = (index) => {
@@ -125,13 +147,16 @@ const HomePage = () => {
           <div
             key={id}
             id={id}
+            title={title}
             className="service-item"
             onClick={handleServiceClick}
           >
-            <h3 id={id}>{id + ". " + title}</h3>
+            <h3 id={id} title={title}>
+              {id + ". " + title}
+            </h3>
             <ul>
               {sub.map((item, i) => (
-                <li key={i} id={id}>
+                <li key={i} id={id} title={title}>
                   {item}
                 </li>
               ))}

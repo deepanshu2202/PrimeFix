@@ -1,7 +1,13 @@
+// react
 import "../styles/components/navbar.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// icons
 import { GiHamburgerMenu } from "react-icons/gi";
+
+// redux
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -9,6 +15,7 @@ const Navbar = () => {
   const [profileClick, setProfileClick] = useState(false);
   const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
   const [onMobile, setOnMobile] = useState(window.innerWidth < 540);
+  const selectedService = useSelector((state) => state.global.selectedService);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,8 +42,8 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleToggleTheme = () => {
-    setOnMobile(onMobile);
+  const handleLog = () => {
+    console.log("Id : ", selectedService);
   };
 
   const handleLogoutClick = () => {
@@ -55,8 +62,9 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="nav-actions">
-          <div onClick={handleToggleTheme}>Theme</div>
+          <div onClick={handleLog}>log</div>
           <div onClick={() => navigate("/")}>Home</div>
+          <div onClick={() => navigate("/service")}>Service</div>
           <div onClick={() => navigate("/history")}>History</div>
           <div onClick={() => setProfileClick((prev) => !prev)}>Profile</div>
         </div>
@@ -65,11 +73,12 @@ const Navbar = () => {
       <div className={`nav-actions-mobile ${sidebarIsOpen ? "open" : ""}`}>
         <div>
           <div className="nav-action-mobile-btn">Theme</div>
-          <div className="nav-action-mobile-btn">Home</div>
-          <div className="nav-action-mobile-btn">History</div>
-          <div className="nav-action-mobile-btn">Profile</div>
+          <div className="nav-action-mobile-btn" onClick={() => navigate("/")}>Home</div>
+          <div className="nav-action-mobile-btn" onClick={() => navigate("/service")}>Service</div>
+          <div className="nav-action-mobile-btn" onClick={() => navigate("/history")}>History</div>
+          <div className="nav-action-mobile-btn" onClick={() => navigate("/profile")}>Profile</div>
         </div>
-        <div className="mobile-logout-btn">Logout</div>
+        <div className="mobile-logout-btn" onClick={handleLogoutClick}>Logout</div>
       </div>
 
       {profileClick && (

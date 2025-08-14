@@ -52,7 +52,8 @@
 
 /* Inputs & textarea */
 .servicepage-root input,
-.servicepage-root textarea {
+.servicepage-root textarea,
+.servicepage-root select {
   margin-top: 6px;
   padding: 10px;
   font-size: 14px;
@@ -60,6 +61,10 @@
   border-radius: 6px;
   outline: none;
   background-color: white;
+}
+
+.servicepage-root select option {
+  border-radius: 1rem;
 }
 
 .servicepage-root input:focus,
