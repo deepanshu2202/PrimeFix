@@ -1,0 +1,57 @@
+.ticket-root {
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border-radius: inherit;
+  padding: 0.4rem;
+  background-color: #fff;
+
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.ticket-root:hover {
+    background-color: #f7f7f7;
+}
+
+.ticket-head,
+.ticket-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-root p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  box-orient: vertical;
+}
+
+.ticket-title, .ticket-date {
+    color: var(--primary-bg);
+}
+
+.ticket-amount {
+    display: none;
+    color: #57d357;
+}
+
+.ticket-amount.Completed {
+    display: inherit;
+}
+
+.ticket-status-Pending {
+    color: #ffd015;
+}
+
+.ticket-status-Cancelled {
+    color: #eb3a3a;
+}
+
+.ticket-status-Completed {
+    color: #57d357;
+}
