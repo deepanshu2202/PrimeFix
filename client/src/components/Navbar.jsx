@@ -64,7 +64,7 @@ const Navbar = () => {
         <div className="nav-actions">
           <div onClick={handleLog}>log</div>
           <div onClick={() => navigate("/")}>Home</div>
-          <div onClick={() => navigate("/service")}>Service</div>
+          <div onClick={() => navigate("/service")}>Services</div>
           <div onClick={() => navigate("/history")}>History</div>
           <div onClick={() => setProfileClick((prev) => !prev)}>Profile</div>
         </div>
@@ -73,17 +73,43 @@ const Navbar = () => {
       <div className={`nav-actions-mobile ${sidebarIsOpen ? "open" : ""}`}>
         <div>
           <div className="nav-action-mobile-btn">Theme</div>
-          <div className="nav-action-mobile-btn" onClick={() => navigate("/")}>Home</div>
-          <div className="nav-action-mobile-btn" onClick={() => navigate("/service")}>Service</div>
-          <div className="nav-action-mobile-btn" onClick={() => navigate("/history")}>History</div>
-          <div className="nav-action-mobile-btn" onClick={() => navigate("/profile")}>Profile</div>
+          <div className="nav-action-mobile-btn" onClick={() => navigate("/")}>
+            Home
+          </div>
+          <div
+            className="nav-action-mobile-btn"
+            onClick={() => navigate("/service")}
+          >
+            Service
+          </div>
+          <div
+            className="nav-action-mobile-btn"
+            onClick={() => navigate("/history")}
+          >
+            History
+          </div>
+          <div
+            className="nav-action-mobile-btn"
+            onClick={() => navigate("/profile")}
+          >
+            Profile
+          </div>
         </div>
-        <div className="mobile-logout-btn" onClick={handleLogoutClick}>Logout</div>
+        <div className="mobile-logout-btn" onClick={handleLogoutClick}>
+          Logout
+        </div>
       </div>
 
       {profileClick && (
         <div className={`profile-menu ${profileClick ? "open" : ""}`}>
-          <div onClick={() => navigate("/profile")}>Edit profile</div>
+          <div
+            onClick={() => {
+              navigate("/profile");
+              setProfileClick(false);
+            }}
+          >
+            Edit profile
+          </div>
           <div onClick={handleLogoutClick}>logout</div>
         </div>
       )}

@@ -48,16 +48,14 @@ const Ticket = ({ title, amount, description, status, date }) => {
       )}
 
       <div className="ticket-footer">
+        <span>
         <h3 className={`ticket-status-${status}`}>
-          {status}{" "}
-          {status !== "Pending" ? (
-            `(Update Date)`
-          ) : (
-            <button className="ticket-cancel-btn" onClick={handleCancelClick}>
-              cancel
-            </button>
-          )}
+          {status}
         </h3>
+        {(status === "Pending") && (
+          <h3 className="cancel-service-btn" onClick={handleCancelClick}>Cancel Service</h3>
+        ) }
+        </span>
         <h3 className="ticket-date">{date}</h3>
       </div>
     </div>

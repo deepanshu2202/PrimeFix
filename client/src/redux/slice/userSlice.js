@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    name: "",
-    email: "",
+    name: "user123",
+    email: "user12primefix@gmail.com",
     address: {
       main: "226/2, Amrit Colony",
       city: "Rohtak",

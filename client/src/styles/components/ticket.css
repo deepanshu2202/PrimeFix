@@ -71,13 +71,9 @@
   align-items: center;
 }
 
-.ticket-cancel-btn {
-    margin-left: 0.4rem;
-    border: none;
-    color: red;
-    background-color: inherit;
-    font-size: 1.1rem;
-    cursor: pointer;
+.ticket-footer span {
+  display: flex;
+  gap: 1rem;
 }
 
 .ticket-root p {
@@ -111,13 +107,19 @@
 }
 
 .ticket-status-Pending {
-  color: #ffd015;
+  color: #D9A441;
 }
 
 .ticket-status-Cancelled {
-  color: #eb3a3a;
+  color: #D96C6C;
 }
 
 .ticket-status-Completed {
-  color: #57d357;
+  color: #6BBF59;
+}
+
+.cancel-service-btn {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    color: #D96C6C;
+    cursor: pointer;
 }
