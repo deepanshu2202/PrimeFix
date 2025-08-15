@@ -40,6 +40,7 @@
 .filter-container-active-button {
   background: var(--primary-bg) !important;
   color: white;
+  border: none;
 }
 
 .ticket-container {
@@ -49,7 +50,7 @@
   border-radius: 0.5rem;
   height: 100%;
   background-color: var(--gray-bg);
-  overflow-y: auto;
+  overflow-y: auto !important;
 
   display: flex;
   flex-direction: column;

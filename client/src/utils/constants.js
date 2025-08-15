@@ -212,3 +212,28 @@ export const tickets = [
     date: "2025-05-14"
   }
 ];
+
+export const ntickets = [
+  {
+    title: "Plumbing Services",
+    description: "Pipeline leak detected in kitchen area. Requires immediate repair and drainage cleaning to avoid water damage.",
+    amount: 850,
+    status: "Pending",
+    date: "2025-07-12"
+  },
+  {
+    title: "Electrical Services",
+    description: "Main MCB tripping frequently. Need complete wiring check and repair of switchboard in living room.",
+    amount: 1200,
+    status: "Completed",
+    date: "2025-06-25"
+  },
+  {
+    title: "Home Appliances Repair",
+    description: "Washing machine not spinning properly. Needs drum inspection and possible motor replacement.",
+    amount: 1800,
+    status: "Cancelled",
+    date: "2025-04-30"
+  },
+
+];

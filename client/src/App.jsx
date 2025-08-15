@@ -3,7 +3,6 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-import TicketPage from './pages/TicketPage';
 import HistoryPage from './pages/HistoryPage';
 import ProfilePage from './pages/ProfilePage';
 import ServicePage from './pages/ServicePage';
@@ -32,12 +31,6 @@ const router = createBrowserRouter([
       </>
     ),
     // loader: authLoader
-  },
-  {
-    path:'/ticket',
-    element:(
-      <TicketPage />
-    )
   },
   {
     path:'/profile',
