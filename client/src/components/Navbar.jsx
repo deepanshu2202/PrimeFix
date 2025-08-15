@@ -5,9 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 // icons
 import { GiHamburgerMenu } from "react-icons/gi";
+import ConfirmWindow from "./ConfirmWindow";
 
 const Navbar = () => {
+  
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const [profileClick, setProfileClick] = useState(false);
   const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(window.scrollY > 580);
@@ -43,9 +46,9 @@ const Navbar = () => {
     console.log("Logging out...");
   };
 
-  // const handleLog = () => {
-  //   console.log("Id : ", selectedService);
-  // };
+  const handleLog = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div className={`nav-root ${scrolled ? "scrolled" : ""}`}>
@@ -59,7 +62,7 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="nav-actions">
-          {/* <div onClick={handleLog}>log</div> */}
+          <div onClick={handleLog}>log</div>
           <div onClick={() => navigate("/")}>Home</div>
           <div onClick={() => navigate("/service")}>Services</div>
           <div onClick={() => navigate("/history")}>History</div>
@@ -109,6 +112,8 @@ const Navbar = () => {
           <div onClick={handleLogoutClick}>logout</div>
         </div>
       )}
+
+      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} message="on navbar" />
     </div>
   );
 };

@@ -40,7 +40,7 @@
 .filter-container-active-button {
   background: var(--primary-bg) !important;
   color: white;
-  border: none;
+  border: none !important;
 }
 
 .ticket-container {

@@ -1,0 +1,56 @@
+.confirm-window-root {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+
+  background-color: transparent;
+  opacity: 0.9;
+
+  display: none;
+}
+
+.confirm-window-root.open {
+  display: flex;
+}
+
+.window-container {
+  border: 1px solid black;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  background-color: #e6e6e6;
+  color: black;
+}
+
+.window-container p {
+  font-size: 1.2rem;
+}
+
+.confirm-window-actions {
+  /* border: 1px solid red; */
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-window-actions button {
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.4rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cancel-window-btn {
+  background-color: red;
+}
+
+.confirm-window-btn {
+  background-color: green;
+}

@@ -1,20 +1,20 @@
-import './App.css';
-import HomePage from './pages/HomePage';
-import Navbar from './components/Navbar';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
-import HistoryPage from './pages/HistoryPage';
-import ProfilePage from './pages/ProfilePage';
-import ServicePage from './pages/ServicePage';
-import NotFoundPage from './pages/NotFoundPage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import "./App.css";
+import HomePage from "./pages/HomePage";
+import Navbar from "./components/Navbar";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import HistoryPage from "./pages/HistoryPage";
+import ProfilePage from "./pages/ProfilePage";
+import ServicePage from "./pages/ServicePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // import authLoader from './utils/authLoader';
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:(
+    path: "/",
+    element: (
       <>
         <Navbar />
         <HomePage />
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
     // loader: authLoader
   },
   {
-    path:'/history',
-    element:(
+    path: "/history",
+    element: (
       <>
         <Navbar />
         <HistoryPage />
@@ -33,42 +33,35 @@ const router = createBrowserRouter([
     // loader: authLoader
   },
   {
-    path:'/profile',
-    element:(
+    path: "/profile",
+    element: (
       <>
         <Navbar />
         <ProfilePage />
       </>
-    )
+    ),
   },
   {
-    path:'/service',
-    element:(
+    path: "/service",
+    element: (
       <>
-        <Navbar /> 
+        <Navbar />
         <ServicePage />
       </>
-    )
+    ),
   },
   {
-    path:'/login',
-    element:(
-      <LoginPage />
-    )
+    path: "/login",
+    element: <LoginPage />,
   },
   {
-    path:'/register',
-    element:(
-      <SignUpPage />
-    )
+    path: "/register",
+    element: <SignUpPage />,
   },
   {
-    path:'*',
-    element:(
-      <NotFoundPage />
-    )
+    path: "*",
+    element: <NotFoundPage />,
   },
-
 ]);
 
 const App = () => {
@@ -76,7 +69,7 @@ const App = () => {
     <>
       <RouterProvider router={router} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
