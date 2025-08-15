@@ -27,7 +27,6 @@
 /* <======================== ABOUT SECTION =====================> */
 
 .about-section {
-  /* height: 90vh; */
   padding: 1.5rem;
   display: flex;
   align-items: center;
@@ -45,6 +44,14 @@
   gap: 0.6rem;
 }
 
+.about-details p {
+  padding: 0.4rem;
+}
+
+.about-section-image {
+  height: 55vh !important;
+}
+
 .about-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -53,7 +60,6 @@
 }
 
 .about-cards div {
-  /* height: 35vh; */
   width: 22vw;
   border-radius: 1rem;
   display: flex;
@@ -74,10 +80,6 @@
 
 .about-cards div:hover {
   transform: scale(1.05);
-}
-
-.service-image {
-  height: 55vh;
 }
 
 /* <======================== SERVICE SECTION =====================> */
@@ -144,16 +146,11 @@
 
 .faq-item {
   width: 80%;
-  border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 1rem;
   cursor: pointer;
   border-radius: 0.8rem;
+  background-color: #fff;
   transition: all 0.3s;
-}
-
-.faq-item:hover {
-  transform: scale(1.01);
-  border: 1px solid #333;
 }
 
 .faq-item h3 {
@@ -307,6 +304,7 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .footer ul li a:hover {

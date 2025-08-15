@@ -93,7 +93,7 @@ const HomePage = () => {
             installations, or maintenance, our verified experts provide fast,
             reliable, and affordable solutions.
           </p>
-          <img className="service-image" src={serviceImg} alt="service-img" />
+          <img className="about-section-image" src={serviceImg} alt="service-img" />
         </span>
         <div className="about-cards">
           <div>
@@ -236,19 +236,16 @@ const HomePage = () => {
             <h3>Quick Links</h3>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <a onClick={() => navigate('/')}>Home</a>
               </li>
               <li>
-                <a href="/services">Services</a>
+                <a onClick={() => navigate('/service')}>Services</a>
               </li>
               <li>
-                <a href="/about">About</a>
+                <a onClick={() => navigate('/history')}>History</a>
               </li>
               <li>
-                <a href="/contact">Contact</a>
-              </li>
-              <li>
-                <a href="/faq">FAQ</a>
+                <a onClick={() => navigate('/profile')}>Profile</a>
               </li>
             </ul>
           </div>
@@ -257,14 +254,14 @@ const HomePage = () => {
           <div className="footer-contact">
             <h3>Contact Us</h3>
             <ul>
-              <li>📍 123 Main Street, City</li>
+              <li>📍  Rohtak City, Haryana</li>
               <li>📞 +91 870-893-1785</li>
               <li>✉️ support@primefix.com</li>
             </ul>
           </div>
 
           {/* Social Links */}
-          <div className="footer-social">
+          {/* <div className="footer-social">
             <h3>Follow Us</h3>
             <div className="social-icons">
               <a href="#">
@@ -280,14 +277,14 @@ const HomePage = () => {
                 <FaLinkedinIn />
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom */}
         <div className="footer-bottom">
           © {new Date().getFullYear()} PrimeFix. All Rights Reserved. <br />
           create by{" "}
-          <a className="name-link" href="#">
+          <a className="name-link" href="https://github.com/deepanshu2202">
             Deepanshu
           </a>
         </div>

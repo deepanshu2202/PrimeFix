@@ -6,16 +6,12 @@ import { useNavigate } from "react-router-dom";
 // icons
 import { GiHamburgerMenu } from "react-icons/gi";
 
-// redux
-import { useSelector } from "react-redux";
-
 const Navbar = () => {
   const navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
   const [profileClick, setProfileClick] = useState(false);
   const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(window.scrollY > 580);
   const [onMobile, setOnMobile] = useState(window.innerWidth < 540);
-  const selectedService = useSelector((state) => state.global.selectedService);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,13 +38,14 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleLog = () => {
-    console.log("Id : ", selectedService);
-  };
-
+  
   const handleLogoutClick = () => {
     console.log("Logging out...");
   };
+
+  // const handleLog = () => {
+  //   console.log("Id : ", selectedService);
+  // };
 
   return (
     <div className={`nav-root ${scrolled ? "scrolled" : ""}`}>
@@ -62,7 +59,7 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="nav-actions">
-          <div onClick={handleLog}>log</div>
+          {/* <div onClick={handleLog}>log</div> */}
           <div onClick={() => navigate("/")}>Home</div>
           <div onClick={() => navigate("/service")}>Services</div>
           <div onClick={() => navigate("/history")}>History</div>
@@ -72,7 +69,6 @@ const Navbar = () => {
 
       <div className={`nav-actions-mobile ${sidebarIsOpen ? "open" : ""}`}>
         <div>
-          <div className="nav-action-mobile-btn">Theme</div>
           <div className="nav-action-mobile-btn" onClick={() => navigate("/")}>
             Home
           </div>

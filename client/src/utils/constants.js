@@ -105,135 +105,127 @@ export const services = {
 
 export const faqs = [
   {
-    question: "What does each service include?",
+    question: "How do I book a service?",
     answer:
-      "Each service comes with a detailed breakdown of deliverables, timelines, and cost.",
+      "Simply head to our Services section, choose the type of service you need, add your address, provide a detailed description, and upload images if needed, then confirm your booking for a quick and hassle-free experience.",
+  },
+  {
+    question: "How do I track my booking status?",
+    answer:
+      "You can easily track your booking status from the History page, where all your past and ongoing bookings are listed with real-time updates."
   },
   {
     question: "How long does it take to complete a service?",
     answer:
-      "Completion time varies per service, but most are delivered within 5-7 business days.",
+      "Completion time varies per service, but most are delivered within 2-4 business days.",
   },
   {
-    question: "Can I customize the service according to my needs?",
-    answer: "Yes, we offer customization options for all services.",
-  },
-  {
-    question: "What does each service include?",
+    question: "Can I leave feedback after service completion?",
     answer:
-      "Each service comes with a detailed breakdown of deliverables, timelines, and cost." +
-      "Each service comes with a detailed ",
+      "Yes! After your service is completed, you’ll have the option to rate the professional and share your feedback directly in the website. Your review helps us maintain quality and improve our services.",
+  },
+  {
+    question: "Do you provide both home and office services?",
+    answer:
+      "Absolutely! We serve both residential and commercial needs, and you can even update your address when booking to ensure the service reaches the right location, whether it’s your home or workplace.",
   },
 ];
 
 export const tickets = [
   {
     title: "Plumbing Services",
-    description: "Pipeline leak detected in kitchen area. Requires immediate repair and drainage cleaning to avoid water damage.",
+    description:
+      "Pipeline leak detected in kitchen area. Requires immediate repair and drainage cleaning to avoid water damage.",
     amount: 850,
     status: "Pending",
-    date: "2025-07-12"
+    date: "2025-07-12",
   },
   {
     title: "Electrical Services",
-    description: "Main MCB tripping frequently. Need complete wiring check and repair of switchboard in living room.",
+    description:
+      "Main MCB tripping frequently. Need complete wiring check and repair of switchboard in living room.",
     amount: 1200,
     status: "Completed",
-    date: "2025-06-25"
+    date: "2025-06-25",
   },
   {
     title: "AC & HVAC Services",
-    description: "AC cooling very low. Requires gas refilling and duct cleaning for better performance.",
+    description:
+      "AC cooling very low. Requires gas refilling and duct cleaning for better performance.",
     amount: 2500,
     status: "Pending",
-    date: "2025-05-18"
+    date: "2025-05-18",
   },
   {
     title: "Home Appliances Repair",
-    description: "Washing machine not spinning properly. Needs drum inspection and possible motor replacement.",
+    description:
+      "Washing machine not spinning properly. Needs drum inspection and possible motor replacement.",
     amount: 1800,
     status: "Cancelled",
-    date: "2025-04-30"
+    date: "2025-04-30",
   },
   {
     title: "Carpentry & Interior Fittings",
-    description: "New modular kitchen installation with custom cabinets and wooden shelf setup.",
+    description:
+      "New modular kitchen installation with custom cabinets and wooden shelf setup.",
     amount: 9500,
     status: "Completed",
-    date: "2025-07-05"
+    date: "2025-07-05",
   },
   {
     title: "Painting, Waterproofing & Décor",
-    description: "Interior wall painting with two accent colors and waterproofing for terrace roof.",
+    description:
+      "Interior wall painting with two accent colors and waterproofing for terrace roof.",
     amount: 7200,
     status: "Pending",
-    date: "2025-06-02"
+    date: "2025-06-02",
   },
   {
     title: "Cleaning, Laundry & Sanitization",
-    description: "Complete deep cleaning of 3BHK house along with carpet shampooing and sanitization.",
+    description:
+      "Complete deep cleaning of 3BHK house along with carpet shampooing and sanitization.",
     amount: 3000,
     status: "Completed",
-    date: "2025-07-29"
+    date: "2025-07-29",
   },
   {
     title: "Pest Control",
-    description: "Severe termite infestation in wooden wardrobe. Requires herbal and chemical treatment.",
+    description:
+      "Severe termite infestation in wooden wardrobe. Requires herbal and chemical treatment.",
     amount: 2000,
     status: "Pending",
-    date: "2025-06-15"
+    date: "2025-06-15",
   },
   {
     title: "Metal & Structural Work",
-    description: "Fabrication and installation of custom iron grill for balcony along with gate repair.",
+    description:
+      "Fabrication and installation of custom iron grill for balcony along with gate repair.",
     amount: 4500,
     status: "Completed",
-    date: "2025-05-09"
+    date: "2025-05-09",
   },
   {
     title: "Gardening & Landscaping",
-    description: "Complete garden redesign with new flower bed, hedge trimming, and drip irrigation setup.",
+    description:
+      "Complete garden redesign with new flower bed, hedge trimming, and drip irrigation setup.",
     amount: 5000,
     status: "Cancelled",
-    date: "2025-07-20"
+    date: "2025-07-20",
   },
   {
     title: "IT & Smart Home Support",
-    description: "Setup of 4 security cameras with live mobile viewing and Wi-Fi signal extender installation.",
+    description:
+      "Setup of 4 security cameras with live mobile viewing and Wi-Fi signal extender installation.",
     amount: 3800,
     status: "Pending",
-    date: "2025-06-28"
+    date: "2025-06-28",
   },
   {
     title: "Shifting & General Help",
-    description: "Relocation of 2BHK house including packing, transportation, and furniture assembly.",
+    description:
+      "Relocation of 2BHK house including packing, transportation, and furniture assembly.",
     amount: 7500,
     status: "Completed",
-    date: "2025-05-14"
-  }
-];
-
-export const ntickets = [
-  {
-    title: "Plumbing Services",
-    description: "Pipeline leak detected in kitchen area. Requires immediate repair and drainage cleaning to avoid water damage.",
-    amount: 850,
-    status: "Pending",
-    date: "2025-07-12"
+    date: "2025-05-14",
   },
-  {
-    title: "Electrical Services",
-    description: "Main MCB tripping frequently. Need complete wiring check and repair of switchboard in living room.",
-    amount: 1200,
-    status: "Completed",
-    date: "2025-06-25"
-  },
-  {
-    title: "Home Appliances Repair",
-    description: "Washing machine not spinning properly. Needs drum inspection and possible motor replacement.",
-    amount: 1800,
-    status: "Cancelled",
-    date: "2025-04-30"
-  },
-
 ];
