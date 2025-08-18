@@ -10,12 +10,14 @@ import ConfirmWindow from "./ConfirmWindow";
 const Navbar = () => {
   
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // testing
   const [profileClick, setProfileClick] = useState(false);
   const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(window.scrollY > 580);
   const [onMobile, setOnMobile] = useState(window.innerWidth < 540);
 
+
+  // useEffects
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 580);
@@ -41,14 +43,20 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  
+  // functions
   const handleLogoutClick = () => {
     console.log("Logging out...");
   };
 
   const handleLog = () => {
-    setIsOpen(true);
+    console.log("log clicked!");
   };
+
+  // testing
+  const handleConfirmClick = () => {
+    console.log("Confirm clicked!");
+    setIsOpen(false);
+  }
 
   return (
     <div className={`nav-root ${scrolled ? "scrolled" : ""}`}>
@@ -113,7 +121,8 @@ const Navbar = () => {
         </div>
       )}
 
-      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} message="on navbar" />
+      {/* testing */}
+      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} message="on navbar" confirmFunction={handleConfirmClick} />
     </div>
   );
 };
