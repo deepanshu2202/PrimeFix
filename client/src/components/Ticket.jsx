@@ -53,7 +53,7 @@ const Ticket = ({ title, amount, description, status, date }) => {
           {status}
         </h3>
         {(status === "Pending") && (
-          <h3 className="cancel-service-btn" onClick={handleCancelClick}>Cancel Service</h3>
+          <h3 className="cancel-service-btn" onClick={handleCancelClick}>Cancel</h3>
         ) }
         </span>
         <h3 className="ticket-date">{date}</h3>

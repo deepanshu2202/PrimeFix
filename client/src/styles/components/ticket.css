@@ -1,33 +1,43 @@
 .ticket-root {
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  border-radius: inherit;
-  padding: 0.4rem;
+  border-radius: 10px;
+  padding: 0.8rem;
   background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
   max-height: 120px;
-  transition: background-color 0.25s, max-height 0.5s ease;
+  transition: background-color 0.25s, max-height 0.5s ease, box-shadow 0.3s ease;
+}
+
+.ticket-root:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .ticket-root.open {
-  max-height: 600px;
-  gap: 0.3rem;
+  max-height: 650px;
+  gap: 0.5rem;
 }
 
 .ticket-action {
-    display: flex;
-    justify-content: end;
-    height: fit-content;
-    width: fit-content;
-    align-self: self-end;
-    border: none;
-    cursor: pointer;
-    background-color: inherit;
-    font-size: 1rem;
-    padding-bottom: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    margin-right: 0.2rem;
+  display: flex;
+  justify-content: end;
+  height: fit-content;
+  width: fit-content;
+  align-self: self-end;
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--primary-bg);
+  transition: background-color 0.2s;
+}
+
+.ticket-action:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .ticket-details {
@@ -36,7 +46,7 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   transition: opacity 0.4s ease, max-height 0.9s ease;
 }
 
@@ -45,23 +55,63 @@
   max-height: 400px;
 }
 
+.ticket-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.ticket-details ul li {
+  margin-bottom: 4px;
+}
+
 .ticket-images-container {
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
   height: 120px;
   padding: 0.4rem;
   display: flex;
-  gap: 0.3rem;
+  gap: 0.5rem;
+  background-color: #fafafa;
+  overflow-x: auto;
+  scrollbar-width: thin; /* for Firefox */
+  scrollbar-color: var(--primary-bg) rgba(0, 0, 0, 0.1);
+}
+
+.ticket-images-container::-webkit-scrollbar {
+  height: 8px; /* horizontal scrollbar height */
+}
+
+.ticket-images-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.ticket-images-container::-webkit-scrollbar-thumb {
+  background: var(--primary-bg);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.ticket-images-container::-webkit-scrollbar-thumb:hover {
+  background: #333; /* slightly darker on hover */
+}
+
+.ticket-images-container::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .ticket-images-container span {
-  height: 100%;
-  width: 100px;
-  background-color: yellow;
-}
-
-.ticket-details ul {
-  list-style: none;
+  flex: 0 0 100px;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #555;
 }
 
 .ticket-head,
@@ -74,6 +124,7 @@
 .ticket-footer span {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .ticket-root p {
@@ -85,41 +136,58 @@
   text-overflow: ellipsis;
   line-clamp: 1;
   box-orient: vertical;
+  font-size: 0.95rem;
+  color: #555;
 }
 
 .ticket-root.open p {
   display: inherit;
-  margin: 0;
+  margin: 0.4rem 0;
 }
 
-.ticket-title,
-.ticket-date {
+.ticket-title {
   color: var(--primary-bg);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ticket-date {
+  color: #888;
+  font-size: 0.9rem;
 }
 
 .ticket-amount {
   display: none;
-  color: #57d357;
+  font-weight: 600;
 }
 
 .ticket-amount.Completed {
   display: inherit;
+  color: #4caf50;
 }
 
 .ticket-status-Pending {
-  color: #D9A441;
+  color: #d9a441;
+  font-weight: 500;
 }
 
 .ticket-status-Cancelled {
-  color: #D96C6C;
+  color: #d96c6c;
+  font-weight: 500;
 }
 
 .ticket-status-Completed {
-  color: #6BBF59;
+  color: #6bbf59;
+  font-weight: 500;
 }
 
 .cancel-service-btn {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    color: #D96C6C;
-    cursor: pointer;
+  color: #d96c6c;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.cancel-service-btn:hover {
+  color: #b94a4a;
 }

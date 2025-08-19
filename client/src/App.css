@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Mozilla+Headline:wght@200..700&family=Varela+Round&display=swap');
+
 
 :root {
   --primary-bg: #3d5a80;
@@ -12,7 +13,7 @@
   padding: 0;
   box-sizing: border-box;
 
-  font-family: "Varela Round", sans-serif;
+  font-family: "Libertinus Sans", sans-serif;
   font-style: normal;
 }
 

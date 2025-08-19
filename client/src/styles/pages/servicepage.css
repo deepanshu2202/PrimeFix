@@ -83,12 +83,23 @@
 
 .address-checkbox input {
   margin: 0;
+  cursor: pointer;
 }
 
 /* Two-column layout for city/pincode and state/country */
 .servicepage-root div {
   display: flex;
   gap: 16px;
+}
+
+/* .service-address-container div {
+  border: 1px solid red;
+  display: flex !important;
+  /* flex-direction: column; 
+} */
+
+.service-address-container div label {
+  width: 45%;
 }
 
 .servicepage-root div label {
@@ -162,6 +173,14 @@
     flex-direction: column;
     gap: 10px;
   }
+
+  .service-address-container div {
+    flex-direction: row;
+  }
+
+  .service-address-container div label {
+    width: 100%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -173,6 +192,10 @@
   .service-details-container,
   .service-address-container {
     padding: 0.8rem;
+  }
+
+  .service-address-container div {
+    flex-direction: column;
   }
 
   .submit-btn {

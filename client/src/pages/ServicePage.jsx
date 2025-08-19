@@ -60,7 +60,7 @@ const ServicePage = () => {
   // functions
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(userSavedAddress);
+    console.log(serviceImages);
   };
 
   return (
@@ -86,12 +86,13 @@ const ServicePage = () => {
             <textarea
               value={serviceDescription}
               onChange={(e) => setServiceDescription(e.target.value)}
+              placeholder="Please write a detailed description of the problem...."
               required
             />
           </label>
 
           <label htmlFor="service-images" className="service-image">
-            Upload files <br />
+            Upload files {"(if needed)"} <br />
             <input
               multiple
               accept="image/*"
