@@ -1,4 +1,4 @@
-.ticket-root {
+.request-item-root {
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -6,21 +6,22 @@
   padding: 0.8rem;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 100%;
 
   max-height: 120px;
   transition: background-color 0.25s, max-height 0.5s ease, box-shadow 0.3s ease;
 }
 
-.ticket-root:hover {
+.request-item-root:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.ticket-root.open {
+.request-item-root.open {
   max-height: 650px;
   gap: 0.5rem;
 }
 
-.ticket-action {
+.request-item-action {
   display: flex;
   justify-content: end;
   height: fit-content;
@@ -36,11 +37,11 @@
   transition: background-color 0.2s;
 }
 
-.ticket-action:hover {
+.request-item-action:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.ticket-details {
+.request-item-details {
   opacity: 0;
   max-height: 0;
   overflow: hidden;
@@ -50,24 +51,30 @@
   transition: opacity 0.4s ease, max-height 0.9s ease;
 }
 
-.ticket-details.open {
+.request-item-details.open {
   opacity: 1;
   max-height: 400px;
 }
 
-.ticket-details ul {
+.request-item-details ul {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: 0.9rem;
   color: #444;
+  display: flex;
+  flex-direction: column;
 }
 
-.ticket-details ul li {
+.request-item-details ul li {
   margin-bottom: 4px;
 }
 
-.ticket-images-container {
+.request-item-worker-detaills {
+  align-items: end;
+}
+
+.request-item-images-container {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   height: 120px;
@@ -80,30 +87,30 @@
   scrollbar-color: var(--primary-bg) rgba(0, 0, 0, 0.1);
 }
 
-.ticket-images-container::-webkit-scrollbar {
+.request-item-images-container::-webkit-scrollbar {
   height: 8px; /* horizontal scrollbar height */
 }
 
-.ticket-images-container::-webkit-scrollbar-track {
+.request-item-images-container::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 10px;
 }
 
-.ticket-images-container::-webkit-scrollbar-thumb {
+.request-item-images-container::-webkit-scrollbar-thumb {
   background: var(--primary-bg);
   border-radius: 10px;
   transition: background 0.3s;
 }
 
-.ticket-images-container::-webkit-scrollbar-thumb:hover {
+.request-item-images-container::-webkit-scrollbar-thumb:hover {
   background: #333; /* slightly darker on hover */
 }
 
-.ticket-images-container::-webkit-scrollbar-corner {
+.request-item-images-container::-webkit-scrollbar-corner {
   background: transparent;
 }
 
-.ticket-images-container span {
+.request-item-images-container span {
   flex: 0 0 100px;
   border-radius: 6px;
   background-color: #f1f1f1;
@@ -114,20 +121,20 @@
   color: #555;
 }
 
-.ticket-head,
-.ticket-footer {
+.request-item-head,
+.request-item-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.ticket-footer span {
+.request-item-footer span {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-.ticket-root p {
+.request-item-root p {
   margin: 0.3rem 0 0.3rem 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -140,44 +147,49 @@
   color: #555;
 }
 
-.ticket-root.open p {
+.request-item-root.open p {
   display: inherit;
   margin: 0.4rem 0;
 }
 
-.ticket-title {
+.request-item-title {
   color: var(--primary-bg);
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.ticket-date {
+.request-item-date {
   color: #888;
   font-size: 0.9rem;
 }
 
-.ticket-amount {
+.request-item-amount {
   display: none;
   font-weight: 600;
 }
 
-.ticket-amount.Completed {
+.request-item-amount.Completed {
   display: inherit;
   color: #4caf50;
 }
 
-.ticket-status-Pending {
-  color: #d9a441;
+.request-item-status-Pending {
+  color: #cc9f4b;
   font-weight: 500;
 }
 
-.ticket-status-Cancelled {
+.request-item-status-Cancelled {
   color: #d96c6c;
   font-weight: 500;
 }
 
-.ticket-status-Completed {
+.request-item-status-Completed {
   color: #6bbf59;
+  font-weight: 500;
+}
+
+.request-item-status-In.Progress {
+  color: #ecaa2e;
   font-weight: 500;
 }
 
@@ -190,4 +202,49 @@
 
 .cancel-service-btn:hover {
   color: #b94a4a;
+}
+
+.update-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.update-details-heading {
+  margin: 0.4rem 0;
+  color: var(--primary-bg);
+}
+
+.request-update-form {
+  padding: 0.1rem 0 0.6rem 0;
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.request-update-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.request-update-form label input {
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.4rem;
+}
+
+.request-update-form input:focus {
+  outline: none;
+}
+
+.update-worker-btn {
+  height: 100%;
+  padding: 0.3rem;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.4rem;
+  margin-left: auto;
+  cursor: pointer;
+  align-self: flex-end;
 }

@@ -1,0 +1,28 @@
+
+.complaint-page-root {
+    width: calc(100vw - 150px);
+    margin-left: 150px;
+    height: 100vh;
+    padding: 0.7rem 1rem;
+    background-color: var(--gray-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.complaint-page-header {
+    height: fit-content;
+    background-color: var(--primary-bg);
+    text-align: center;
+    color: #fff;
+    padding: 0.3rem 0;
+    border-top-left-radius: 0.6rem;
+    border-top-right-radius: 0.6rem;
+}
+
+.complaint-item-container {
+    height: 100%;
+
+
+    border: 1px solid black;
+}
