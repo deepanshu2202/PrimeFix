@@ -1,4 +1,7 @@
 
 .review-item-root {
-    border: 1px solid black;
+    padding: 0.4rem;
+    background-color: #fff;
+    border-radius: 0.4rem;
+    border: 1px solid rgb(0, 0, 0, 0.3);
 }

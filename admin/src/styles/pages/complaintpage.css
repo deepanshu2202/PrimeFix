@@ -22,7 +22,15 @@
 
 .complaint-item-container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    overflow-y: auto;
+}
 
-
-    border: 1px solid black;
+@media (max-width: 640px) {
+    .complaint-page-root {
+        width: 100%;
+        margin-left: 0;
+    }
 }

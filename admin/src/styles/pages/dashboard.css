@@ -7,6 +7,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+
+    transition: margin 0.3s;
 }
 
 .dashboard-nav {
@@ -48,4 +50,11 @@
     border: none !important;
     background-color: var(--primary-bg);
     color: #fff;
+}
+
+@media (max-width: 640px) {
+    .dashboard-root {
+        width: 100%;
+        margin-left: 0;
+    }
 }

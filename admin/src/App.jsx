@@ -5,6 +5,8 @@ import FeedbackPage from './pages/FeedbackPage';
 import ComplaintPage from './pages/ComplaintPage';
 import { RouterProvider } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
+import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/LoginPage';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,15 @@ const router = createBrowserRouter([
       <>
         <Sidebar />
         <Dashboard />
+      </>
+    )
+  },
+  {
+    // login
+    path: '/login',
+    element:(
+      <>
+        <LoginPage />
       </>
     )
   },
@@ -29,11 +40,20 @@ const router = createBrowserRouter([
   },
   {
     // Feedback
-    path: '/feedback',
+    path: '/feedbacks',
     element:(
       <>
         <Sidebar />
         <FeedbackPage />
+      </>
+    )
+  },
+  {
+    // Feedback
+    path: '*',
+    element:(
+      <>
+        <NotFoundPage />
       </>
     )
   }
