@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 // icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import ConfirmWindow from "./ConfirmWindow";
+import { logoutUser } from "../utils/api";
 
 const Navbar = () => {
   
@@ -44,8 +45,10 @@ const Navbar = () => {
   }, []);
 
   // functions
-  const handleLogoutClick = () => {
-    console.log("Logging out...");
+  const handleLogoutClick = async (e) => {
+    e.preventDefault();
+    await logoutUser();
+    navigate('/login');
   };
 
   const handleLog = () => {

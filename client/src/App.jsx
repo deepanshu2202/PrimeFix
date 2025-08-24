@@ -1,55 +1,48 @@
 import "./App.css";
-import HomePage from "./pages/HomePage";
+import { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import HistoryPage from "./pages/HistoryPage";
-import ProfilePage from "./pages/ProfilePage";
-import ServicePage from "./pages/ServicePage";
-import NotFoundPage from "./pages/NotFoundPage";
+import Loader from "./components/loader";
+import { Toaster } from "react-hot-toast";
+import authLoader from "./utils/authLoader";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import WorkPage from "./pages/WorkPage";
 
-// import authLoader from './utils/authLoader';
+// ✅ Lazy imports for pages
+const WorkPage = lazy(() => import("./pages/WorkPage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
+const HistoryPage = lazy(() => import("./pages/HistoryPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const ServicePage = lazy(() => import("./pages/ServicePage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+
+const withNavbar = (children) => (
+  <>
+    <Navbar />
+    {children}
+  </>
+);
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <Navbar />
-        <HomePage />
-      </>
-    ),
-    // loader: authLoader
+    element: withNavbar(<HomePage />),
+    loader: authLoader,
   },
   {
     path: "/history",
-    element: (
-      <>
-        <Navbar />
-        <HistoryPage />
-      </>
-    ),
-    // loader: authLoader
+    element: withNavbar(<HistoryPage />),
+    loader: authLoader,
   },
   {
     path: "/profile",
-    element: (
-      <>
-        <Navbar />
-        <ProfilePage />
-      </>
-    ),
+    element: withNavbar(<ProfilePage />),
+    loader: authLoader,
   },
   {
     path: "/service",
-    element: (
-      <>
-        <Navbar />
-        <ServicePage />
-      </>
-    ),
+    element: withNavbar(<ServicePage />),
+    loader: authLoader,
   },
   {
     path: "/login",
@@ -61,12 +54,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/work",
-    element: (
-      <>
-        <Navbar />
-        <WorkPage />
-      </>
-    ),
+    element: withNavbar(<WorkPage />),
+    loader: authLoader,
   },
   {
     path: "*",
@@ -76,9 +65,12 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <div className="app-root">
+      <Suspense fallback={<Loader />}>
+        <RouterProvider router={router} hydrateFallbackElement={<div />} />
+      </Suspense>
+      <Toaster />
+    </div>
   );
 };
 

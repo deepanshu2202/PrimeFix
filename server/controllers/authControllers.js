@@ -69,8 +69,21 @@ export const updateProfile = async (req, res) => {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    user.name = name.trim();
-    user.address = new address;
+    if (name && name.trim() !== "") {
+      user.name = name.trim();
+    }
+
+    if (address) {
+      user.address = { 
+        main: address.main || user.address.main,
+        city: address.city || user.address.city,
+        pincode: address.pincode || user.address.pincode,
+        state: address.state || user.address.state,
+        country: address.country || user.address.country,
+        phone: address.phone || user.address.phone,
+        altPhone: address.altPhone || user.address.altPhone,
+      };
+    }
     await user.save();
 
     res.status(200).json({ message: "Profile updated successfully" });

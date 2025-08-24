@@ -2,6 +2,8 @@ import "../styles/pages/signuppage.css";
 import signupImg from "../assets/signup-img.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signUpUser } from "../utils/api";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -11,10 +13,21 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // functions
-  const handleSignupSubmit = (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("signing up...");
+    if (password !== confirmPassword) {
+      toast.error("passwords are different");
+      return;
+    }
+
+    try {
+      const data = {name, email, password};
+      await signUpUser(data);
+      navigate('/');
+    } catch (err) {
+      console.log("SignUpError: ", err);
+    }
   };
 
   return (

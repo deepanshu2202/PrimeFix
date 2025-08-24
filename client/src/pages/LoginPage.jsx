@@ -2,6 +2,7 @@ import "../styles/pages/loginpage.css";
 import loginImg from "../assets/login-img.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { loginUser } from "../utils/api";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -9,10 +10,15 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   // functions
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("logging in.....");
+    try {
+      const data = { email, password };
+      await loginUser(data);
+      navigate('/');
+    } catch (err) {
+      console.log("LoginError:", err);
+    }
   };
 
   return (

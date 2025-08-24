@@ -3,11 +3,16 @@ import { useState } from "react";
 import "../styles/pages/profilepage.css";
 
 // redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/slice/userSlice";
+
+import { updateProfile } from "../utils/api";
+import { toast } from 'react-hot-toast';
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user);
   const userSavedAddress = user.address;
+  const dispatch = useDispatch();
 
   const [userCity, setUserCity] = useState("");
   const [username, setUsername] = useState("");
@@ -19,10 +24,36 @@ const ProfilePage = () => {
   const [userAltPhoneNumber, setUserAltPhoneNumber] = useState("");
 
   // functions
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("updating profile....");
+    const newAddress = {
+      main: userAddress || userSavedAddress.main,
+      city: userCity || userSavedAddress.city,
+      pincode: cityPincode || userSavedAddress.pincode,
+      state: userState || userSavedAddress.state,
+      country: userCountry || userSavedAddress.country,
+      phone: userPhoneNumber || userSavedAddress.phone,
+      altPhone: userAltPhoneNumber || userSavedAddress.altPhone,
+    }
+
+    try {
+      await updateProfile({name: username, address: newAddress});
+      dispatch(setUser({name: username, address: newAddress}));
+      toast.success("Details updated successfully");
+      setUserCity("");
+      setUserState("");
+      setUsername("");
+      setCityPincode("");
+      setUserAddress("");
+      setUserCountry("");
+      setUserPhoneNumber("");
+      setUserAltPhoneNumber("");
+
+    } catch (err) {
+      toast.error("Error updating details");
+      console.log("Error Updating profile: ", err);
+    }
   };
 
   return (
