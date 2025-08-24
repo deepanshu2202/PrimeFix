@@ -74,6 +74,7 @@ const Navbar = () => {
           <div onClick={() => navigate("/")}>Home</div>
           <div onClick={() => navigate("/service")}>Services</div>
           <div onClick={() => navigate("/history")}>History</div>
+          <div onClick={() => navigate('/work')}>Work</div>
           <div onClick={() => setProfileClick((prev) => !prev)}>Profile</div>
         </div>
       )}

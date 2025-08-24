@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ServicePage from "./pages/ServicePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import WorkPage from "./pages/WorkPage";
 
 // import authLoader from './utils/authLoader';
 
@@ -57,6 +58,15 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <SignUpPage />,
+  },
+  {
+    path: "/work",
+    element: (
+      <>
+        <Navbar />
+        <WorkPage />
+      </>
+    ),
   },
   {
     path: "*",

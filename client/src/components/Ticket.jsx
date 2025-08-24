@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/components/ticket.css";
+import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 
 const Ticket = ({ title, amount, description, status, date }) => {
   const [rootClicked, setRootClicked] = useState(false);
@@ -14,7 +15,7 @@ const Ticket = ({ title, amount, description, status, date }) => {
         className="ticket-action"
         onClick={() => setRootClicked((p) => !p)}
       >
-        {rootClicked ? "less" : "more"}
+        {rootClicked ? <IoCaretUp size={16}/> : <IoCaretDown size={16}/>}
       </button>
       {rootClicked && (
         <div className={`ticket-details ${rootClicked ? "open" : ""}`}>

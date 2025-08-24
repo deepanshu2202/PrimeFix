@@ -1,0 +1,251 @@
+
+.work-history-item-root {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 100%;
+
+  max-height: 120px;
+  transition: background-color 0.25s, max-height 0.5s ease, box-shadow 0.3s ease;
+}
+
+.work-history-item-root:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.work-history-item-root.open {
+  max-height: 650px;
+  gap: 0.5rem;
+}
+
+.work-history-item-action {
+  display: flex;
+  justify-content: end;
+  height: fit-content;
+  width: fit-content;
+  align-self: self-end;
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--primary-bg);
+  transition: background-color 0.2s;
+}
+
+.work-history-item-action:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.work-history-item-details {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transition: opacity 0.4s ease, max-height 0.9s ease;
+}
+
+.work-history-item-details.open {
+  opacity: 1;
+  max-height: 400px;
+}
+
+.work-history-item-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-history-item-details ul li {
+  margin-bottom: 4px;
+}
+
+.work-history-item-worker-details {
+  align-items: end;
+}
+
+.work-history-item-images-container {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  height: 120px;
+  padding: 0.4rem;
+  display: flex;
+  gap: 0.5rem;
+  background-color: #fafafa;
+  overflow-x: auto;
+  scrollbar-width: thin; /* for Firefox */
+  scrollbar-color: var(--primary-bg) rgba(0, 0, 0, 0.1);
+}
+
+.work-history-item-images-container::-webkit-scrollbar {
+  height: 8px; /* horizontal scrollbar height */
+}
+
+.work-history-item-images-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.work-history-item-images-container::-webkit-scrollbar-thumb {
+  background: var(--primary-bg);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.work-history-item-images-container::-webkit-scrollbar-thumb:hover {
+  background: #333; /* slightly darker on hover */
+}
+
+.work-history-item-images-container::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.work-history-item-images-container span {
+  flex: 0 0 100px;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.work-history-item-head,
+.work-history-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.work-history-item-footer span {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.work-history-item-root p {
+  margin: 0.3rem 0 0.3rem 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  box-orient: vertical;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.work-history-item-root.open p {
+  display: inherit;
+  margin: 0.4rem 0;
+}
+
+.work-history-item-title {
+  color: var(--primary-bg);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.work-history-item-date {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.work-history-item-amount {
+  display: none;
+  font-weight: 600;
+}
+
+.work-history-item-amount.Completed {
+  display: inherit;
+  color: #4caf50;
+}
+
+.work-history-item-status-Pending {
+  color: #cc9f4b;
+  font-weight: 500;
+}
+
+.work-history-item-status-Cancelled {
+  color: #d96c6c;
+  font-weight: 500;
+}
+
+.work-history-item-status-Completed {
+  color: #6bbf59;
+  font-weight: 500;
+}
+
+.work-history-item-status-In.Progress {
+  color: #ecaa2e;
+  font-weight: 500;
+}
+
+.work-history-cancel-service-btn {
+  color: #d96c6c;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.work-history-cancel-service-btn:hover {
+  color: #b94a4a;
+}
+
+.work-history-update-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.work-history-details-heading {
+  margin: 0.4rem 0;
+  color: var(--primary-bg);
+}
+
+.work-history-update-form {
+  padding: 0.1rem 0 0.6rem 0;
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.work-history-update-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-history-update-form label input {
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.4rem;
+}
+
+.work-history-update-form input:focus {
+  outline: none;
+}
+
+.work-history-update-worker-btn {
+  height: 100%;
+  padding: 0.3rem;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.4rem;
+  margin-left: auto;
+  cursor: pointer;
+  align-self: flex-end;
+}
