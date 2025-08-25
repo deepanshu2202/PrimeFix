@@ -2,6 +2,7 @@ import "../styles/components/sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { useState } from "react";
+import { logoutAdmin } from "../utils/api";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -17,6 +18,17 @@ const Sidebar = () => {
     setIsOpen(false);
   };
 
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      await logoutAdmin();
+      navigate("/login");
+    } catch (err) {
+      console.log("Admin Logout Error:\n", err.response.data.message);
+    }
+  }
+
   return (
     <div className={`sidebar-root ${isOpen ? "open" : ""}`}>
       <h2>PrimeFix</h2>
@@ -28,6 +40,9 @@ const Sidebar = () => {
       </div>
       <div val="feed" onClick={handleNavClick}>
         Feedbacks
+      </div>
+      <div onClick={handleLogout} style={{marginTop: "auto"}}>
+        logout
       </div>
 
       <span

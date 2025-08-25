@@ -112,7 +112,7 @@ export const getProfile = async (req, res) => {
   }
 };
 
-// Login Admin
+// Admin
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
 
@@ -125,11 +125,11 @@ export const loginAdmin = async (req, res) => {
       return res.status(400).json({ message: "Incorrect password" });
 
     if (user.role !== 'admin')
-      return res.status(400).json({ message: "not authorized" });
+      return res.status(400).json({ message: "Not authorized" });
 
     const token = generateToken(user._id);
     res
-      .cookie("token", token, {
+      .cookie("adminToken", token, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
@@ -140,4 +140,24 @@ export const loginAdmin = async (req, res) => {
     console.log("Error in LoginAdmin:\n", err);
     res.status(500).json({ message: "Login failed", error: err.message });
   }
+};
+
+export const getAdmin = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (user.role !== 'admin') {
+      res.status(400),json({message: "Not authorized"});
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.log("Error in getProfile:\n");
+    res.status(500).json({ message: "Error fetching profile" });
+  }
+};
+
+export const logoutAdmin = (req, res) => {
+  res
+    .clearCookie("adminToken", { httpOnly: true, secure: true, sameSite: "strict" })
+    .status(200)
+    .json({ message: "Logged out successfully" });
 };

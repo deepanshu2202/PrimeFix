@@ -1,16 +1,25 @@
 import "../styles/pages/loginpage.css";
 import loginImg from "../assets/login-img.png";
 import { useState } from "react";
+import { loginAdmin } from "../utils/api";
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // functions
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    const data = {email, password};
 
-    console.log("logging in.....");
+    try {
+      await loginAdmin(data);
+      navigate('/');
+    } catch (err) {
+      console.log("AdminLogin error: ", err)
+    }
   };
 
   return (
