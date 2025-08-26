@@ -5,6 +5,7 @@ const initialState = {
         id:"1",
         title:"Plumbing Services",
     },
+    allTickets: null,
 }
 
 export const globalSlice = createSlice({
@@ -14,10 +15,13 @@ export const globalSlice = createSlice({
         setSelectedService: (state, actions) => {
             state.selectedService.id = actions.payload.id;
             state.selectedService.title = actions.payload.title;
+        },
+        setAllTickets : (state, actions) => {
+            state.allTickets = actions.payload;
         }
     },
 })
 
-export const { setSelectedService } = globalSlice.actions;
+export const { setSelectedService, setAllTickets } = globalSlice.actions;
 
 export default globalSlice.reducer;

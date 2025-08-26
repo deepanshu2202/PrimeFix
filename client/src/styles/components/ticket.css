@@ -103,15 +103,17 @@
   background: transparent;
 }
 
-.ticket-images-container span {
-  flex: 0 0 100px;
+.ticket-images-container img {
+  /* flex: 0 0 100px;
   border-radius: 6px;
   background-color: #f1f1f1;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
-  color: #555;
+  color: #555; */
+
+  height: 100%;
 }
 
 .ticket-head,
@@ -166,17 +168,22 @@
   color: #4caf50;
 }
 
-.ticket-status-Pending {
+.ticket-status-pending {
   color: #d9a441;
   font-weight: 500;
 }
 
-.ticket-status-Cancelled {
+.ticket-status-pending {
+  color: #eeaf3a;
+  font-weight: 500;
+}
+
+.ticket-status-cancelled {
   color: #d96c6c;
   font-weight: 500;
 }
 
-.ticket-status-Completed {
+.ticket-status-completed {
   color: #6bbf59;
   font-weight: 500;
 }

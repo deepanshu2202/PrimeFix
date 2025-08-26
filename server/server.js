@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/connectDB.js";
 import socketInit from './utils/socketInit.js';
 import authRoutes from './routes/authRoutes.js';
+import ticketRoutes from './routes/ticketRoutes.js';
 
 dotenv.config({ quiet: true });
 const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
@@ -45,6 +46,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/ticket', ticketRoutes);
 
 // // Socket
 socketInit(io);

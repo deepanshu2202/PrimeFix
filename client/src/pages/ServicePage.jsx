@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 
 // miscellaneous
 import { services } from "../utils/constants";
+import { bookTicket } from "../utils/api";
 
 const ServicePage = () => {
+  const name = useSelector((state) => state.user.name);
   const userSavedAddress = useSelector((state) => state.user.address);
   const selectedService = useSelector((state) => state.global.selectedService);
 
@@ -58,9 +60,43 @@ const ServicePage = () => {
   }, [checkbox]);
 
   // functions
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(serviceImages);
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("category", serviceType);
+    formData.append("description", serviceDescription);
+    formData.append(
+      "address",
+      JSON.stringify({
+        main: userAddress,
+        city: userCity,
+        pincode: cityPincode,
+        state: userState,
+        country: userCountry,
+        phone: userPhoneNumber,
+        altPhone: userAltPhoneNumber,
+      })
+    );
+
+    if (serviceImages) {
+      for (let i = 0; i < Math.min(serviceImages.length, 6); i++) {
+        formData.append("photos", serviceImages[i]);
+      }
+    }
+
+    try {
+      const res = await bookTicket(formData);
+      console.log("Successfully booked! Response:\n", res.data);
+    } catch (err) {
+      console.log("Error service booking:\n", err);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setServiceImages(files);
   };
 
   return (
@@ -98,13 +134,19 @@ const ServicePage = () => {
               accept="image/*"
               type="file"
               id="service-images"
-              onChange={(e) => setServiceImages(e.target.files)}
+              onChange={handleImageChange}
             />
           </label>
 
           <div className="images-preview-container">
-            {serviceImages && serviceImages.length !== 0
-              ? "Images"
+            {(serviceImages && serviceImages.length > 0)
+              ? serviceImages.map((file, idx) => (
+                  <img
+                    key={idx}
+                    src={URL.createObjectURL(file)}
+                    alt={`Image number : ${idx + 1}`}
+                  />
+                ))
               : "No Images"}
           </div>
         </div>

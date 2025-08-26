@@ -92,12 +92,6 @@
   gap: 16px;
 }
 
-/* .service-address-container div {
-  border: 1px solid red;
-  display: flex !important;
-  /* flex-direction: column; 
-} */
-
 .service-address-container div label {
   width: 45%;
 }
@@ -115,7 +109,16 @@
 }
 
 .images-preview-container {
-  height: fit-content;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  height: fit-content !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.images-preview-container img {
+  height: 180px;
 }
 
 /* Submit button */

@@ -3,11 +3,21 @@ import mongoose, { Mongoose } from "mongoose";
 const ticketSchema = mongoose.Schema(
   {
     customer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      name: {
+        type: String,
+        required: true,
+      },
+      id: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User", 
+        required: true 
+      },
+    },
+    category: {
+      type: String,
       required: true,
     },
-    descriptiom: {
+    description: {
       type: String,
       required: true,
     },
@@ -42,9 +52,20 @@ const ticketSchema = mongoose.Schema(
         type: String,
       },
     },
+    status: {
+      type: String,
+      enum: ["pending", "inProgress", "completed", "cancelled"],
+      required: true,
+    },
+    charge: {
+      type: String,
+    },
     worker: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      name: String,
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      }
     },
   },
   { timestamps: true }

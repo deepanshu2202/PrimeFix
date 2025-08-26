@@ -37,9 +37,9 @@
 }
 
 .profile-address-container {
-  width: 50%;
+  width: 50% !important;
   height: 100%;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   padding: 1rem;
   border-radius: 0.7rem;
@@ -75,12 +75,13 @@
 }
 
 .profilepage-root div {
-  display: flex;
+  display: flex !important;
   gap: 16px;
 }
 
 .profile-address-container div label {
   flex: 1;
+  width: 45%;
 }
 
 .profile-email input {
@@ -122,6 +123,10 @@
   .profilepage-root div {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .profile-address-container {
+    width: 100% !important;
   }
 }
 

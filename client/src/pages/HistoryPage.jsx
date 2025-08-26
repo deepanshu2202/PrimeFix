@@ -1,11 +1,40 @@
 import { useState } from "react";
 import "../styles/pages/historypage.css";
-import { tickets } from "../utils/constants";
 import Ticket from "./../components/Ticket";
+import { useDispatch, useSelector } from "react-redux";
+import { cancelTicket } from "../utils/api";
+import { setAllTickets } from "../redux/slice/globalSlice";
+import { useEffect } from "react";
 
 const HistoryPage = () => {
+  const dispatch = useDispatch();
   const [btnClicked, setBtnClicked] = useState("all");
+  const tickets = useSelector((state) => state.global.allTickets);
   const [filteredTickets, setFilteredTickets] = useState(tickets);
+
+  const handleCancelClick = async (e, id) => {
+    e.preventDefault();
+    try {
+      await cancelTicket({ ticketId: id });
+      // console.log("New Ticket:", newTicket);
+  
+      const updatedTickets = Object.values(tickets).flat().map((ticket) => {
+        if (ticket._id === id) {
+          return { ...ticket, status: "cancelled" }; 
+        }
+        return ticket;
+      });
+
+      // console.log(updatedTickets);
+      dispatch(setAllTickets({updatedTickets}));
+    } catch (err) {
+      console.log("Error cancelling ticket:", err);
+    }
+  }
+
+  useEffect(() => {
+    setFilteredTickets(tickets);
+  }, [tickets]);
 
   return (
     <div className="historypage-root">
@@ -28,7 +57,7 @@ const HistoryPage = () => {
           }
           onClick={() => {
             setFilteredTickets(
-              tickets.filter((ticket) => ticket.status === "Pending")
+              Object.values(tickets).flat().filter((ticket) => ticket.status === "pending")
             );
             setBtnClicked("pending");
           }}
@@ -37,11 +66,24 @@ const HistoryPage = () => {
         </button>
         <button
           className={
+            btnClicked === "inProgress" ? "filter-container-active-button" : ""
+          }
+          onClick={() => {
+            setFilteredTickets(
+              Object.values(tickets).flat().filter((ticket) => ticket.status === "inPrgress")
+            );
+            setBtnClicked("inProgress");
+          }}
+        >
+          In Progress
+        </button>
+        <button
+          className={
             btnClicked === "completed" ? "filter-container-active-button" : ""
           }
           onClick={() => {
             setFilteredTickets(
-              tickets.filter((ticket) => ticket.status === "Completed")
+              Object.values(tickets).flat().filter((ticket) => ticket.status === "completed")
             );
             setBtnClicked("completed");
           }}
@@ -54,7 +96,7 @@ const HistoryPage = () => {
           }
           onClick={() => {
             setFilteredTickets(
-              tickets.filter((ticket) => ticket.status === "Cancelled")
+              Object.values(tickets).flat().filter((ticket) => ticket.status === "cancelled")
             );
             setBtnClicked("cancelled");
           }}
@@ -63,17 +105,23 @@ const HistoryPage = () => {
         </button>
       </div>
       <div className="ticket-container">
-        {filteredTickets.map((ticket, idx) => (
-          <Ticket
-            id={idx}
+        {Object.values(filteredTickets).flat().map((ticket, idx) => {
+          
+          return <Ticket
             key={idx}
-            title={ticket.title}
-            description={ticket.description}
+            id={ticket._id}
+            charge={ticket.charge}
+            photos={ticket.photos}
             status={ticket.status}
-            amount={ticket.amount}
-            date={ticket.date}
+            title={ticket.category}
+            address={ticket.address}
+            name={ticket.customer.name}
+            description={ticket.description}
+            date={new Date(ticket.createdAt).toLocaleString()}
+            worker={null}
+            handleCancelClick={handleCancelClick}
           />
-        ))}
+        })}
       </div>
     </div>
   );
