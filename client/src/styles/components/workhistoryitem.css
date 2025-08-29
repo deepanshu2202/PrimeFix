@@ -169,27 +169,27 @@
   font-weight: 600;
 }
 
-.work-history-item-amount.Completed {
+.work-history-item-amount.completed {
   display: inherit;
   color: #4caf50;
 }
 
-.work-history-item-status-Pending {
+.work-history-item-status-pending {
   color: #cc9f4b;
   font-weight: 500;
 }
 
-.work-history-item-status-Cancelled {
+.work-history-item-status-cancelled {
   color: #d96c6c;
   font-weight: 500;
 }
 
-.work-history-item-status-Completed {
+.work-history-item-status-completed {
   color: #6bbf59;
   font-weight: 500;
 }
 
-.work-history-item-status-In.Progress {
+.work-history-item-status-inProgress {
   color: #ecaa2e;
   font-weight: 500;
 }

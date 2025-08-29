@@ -168,40 +168,40 @@
   font-weight: 600;
 }
 
-.request-item-amount.Completed {
+.request-item-amount.completed {
   display: inherit;
   color: #4caf50;
 }
 
-.request-item-status-Pending {
+.request-item-status-pending {
   color: #cc9f4b;
   font-weight: 500;
 }
 
-.request-item-status-Cancelled {
+.request-item-status-cancelled {
   color: #d96c6c;
   font-weight: 500;
 }
 
-.request-item-status-Completed {
+.request-item-status-completed {
   color: #6bbf59;
   font-weight: 500;
 }
 
-.request-item-status-In.Progress {
+.request-item-status-inProgress {
   color: #ecaa2e;
   font-weight: 500;
 }
 
 .cancel-service-btn {
-  color: #d96c6c;
+  color: var(--primary-bg);
   cursor: pointer;
   font-size: 1.1rem;
   transition: color 0.2s;
 }
 
 .cancel-service-btn:hover {
-  color: #b94a4a;
+  color: #1a324b;
 }
 
 .update-wrapper {

@@ -1,10 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/pages/workpage.css";
 import WorkRequestItem from "../components/WorkRequestItem";
 import WorkHistoryItem from "../components/WorkHistoryItem";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAmount } from "../utils/api";
+import { setWorkTickets } from "../redux/slice/globalSlice";
 
 const WorkPage = () => {
+  const dispatch = useDispatch();
+  const [workAmount, setWorkAmount] = useState("");
   const [isRequest, setIsRequest] = useState(true);
+  const tickets = useSelector((state) => state.global.workTickets);
+  const [requests, setRequests] = useState(
+    Object.values(tickets)
+      .flat()
+      .filter((ticket) => ticket.status === "inProgress")
+  );
+
+  const updateFunction = async (e, id) => {
+    e.preventDefault();
+    const data = {
+      ticketId: id,
+      charge: workAmount,
+    };
+
+    try {
+      const newTicket = await updateAmount(data);
+      console.log("Updated successfull", newTicket);
+      const updatedTickets = Object.values(tickets)
+        .flat()
+        .map((ticket) => {
+          return ticket._id === id
+            ? { ...ticket, status: "completed", charge: workAmount }
+            : ticket;
+        });
+
+      dispatch(setWorkTickets({ updatedTickets }));
+      setWorkAmount("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    setRequests(
+      Object.values(tickets)
+        .flat()
+        .filter((ticket) => ticket.status === "inProgress")
+    );
+  }, [tickets]);
 
   return (
     <div className="workpage-root">
@@ -25,41 +69,46 @@ const WorkPage = () => {
       <div className="workpage-main">
         {isRequest ? (
           <div className="workpage-request-container">
-            <WorkRequestItem
-              title="Title"
-              amount="1200"
-              description="Description"
-              status="In Progress"
-              date="12-08-2025"
-              customer={{ 
-                CustomerName: "name",
-                AddressMain: "address",
-                City: "City",
-                pincode:"123456",
-                State: "State",
-                Phone: "1234567890",
-                AltPhone: "0123456789"
-              }}
-            />
+            {Object.values(requests)
+              .flat()
+              .map((ticket, idx) => (
+                <WorkRequestItem
+                  key={idx}
+                  id={ticket._id}
+                  title={ticket.category}
+                  amount={ticket.charge}
+                  status={ticket.status}
+                  worker={ticket.worker}
+                  photos={ticket.photos}
+                  address={ticket.address}
+                  customer={ticket.customer}
+                  description={ticket.description}
+                  updateFunction={updateFunction}
+                  workAmount={workAmount}
+                  setWorkAmount={setWorkAmount}
+                  date={new Date(ticket.createdAt).toLocaleString()}
+                />
+              ))}
           </div>
         ) : (
           <div className="workpage-history-container">
-            <WorkHistoryItem
-              title="Title"
-              amount="1200"
-              description="Description"
-              status="Completed"
-              date="12-08-2025"
-              customer={{ 
-                CustomerName: "name",
-                AddressMain: "address",
-                City: "City",
-                pincode:"123456",
-                State: "State",
-                Phone: "1234567890",
-                AltPhone: "0123456789"
-              }}
-            />
+            {Object.values(tickets)
+              .flat()
+              .map((ticket, idx) => (
+                <WorkHistoryItem
+                  key={idx}
+                  id={ticket._id}
+                  title={ticket.category}
+                  amount={ticket.charge}
+                  status={ticket.status}
+                  worker={ticket.worker}
+                  photos={ticket.photos}
+                  address={ticket.address}
+                  customer={ticket.customer}
+                  description={ticket.description}
+                  date={new Date(ticket.createdAt).toLocaleString()}
+                />
+              ))}
           </div>
         )}
       </div>

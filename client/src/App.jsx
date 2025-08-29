@@ -5,6 +5,7 @@ import Loader from "./components/loader";
 import { Toaster } from "react-hot-toast";
 import authLoader from "./utils/authLoader";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { workLoader } from "./utils/workLoader";
 
 // ✅ Lazy imports for pages
 const WorkPage = lazy(() => import("./pages/WorkPage"));
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
   {
     path: "/work",
     element: withNavbar(<WorkPage />),
-    loader: authLoader,
+    loader: workLoader,
   },
   {
     path: "*",
@@ -67,7 +68,7 @@ const App = () => {
   return (
     <div className="app-root">
       <Suspense fallback={<Loader />}>
-        <RouterProvider router={router} hydrateFallbackElement={<div />} />
+        <RouterProvider router={router} HydrateFallback={<Loader />} />
       </Suspense>
       <Toaster />
     </div>

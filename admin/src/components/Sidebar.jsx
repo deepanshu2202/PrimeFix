@@ -6,14 +6,17 @@ import { logoutAdmin } from "../utils/api";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const [activeLink, setActiveLink] = useState("dash");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleNavClick = (e) => {
     const val = e.target.getAttribute("val");
+    setActiveLink(val);
 
     if (val === "dash") navigate("/");
     if (val === "feed") navigate("/feedbacks");
     if (val === "comp") navigate("/complaints");
+    if (val === "cust") navigate("/customers");
 
     setIsOpen(false);
   };
@@ -32,16 +35,19 @@ const Sidebar = () => {
   return (
     <div className={`sidebar-root ${isOpen ? "open" : ""}`}>
       <h2>PrimeFix</h2>
-      <div val="dash" onClick={handleNavClick}>
+      <div className={activeLink === "dash" ? "active-location-link" : ""} val="dash" onClick={handleNavClick}>
         Requests
       </div>
-      <div val="comp" onClick={handleNavClick}>
+      <div className={activeLink === "comp" ? "active-location-link" : ""} val="comp" onClick={handleNavClick}>
         Complaints
       </div>
-      <div val="feed" onClick={handleNavClick}>
+      <div className={activeLink === "feed" ? "active-location-link" : ""} val="feed" onClick={handleNavClick}>
         Feedbacks
       </div>
-      <div onClick={handleLogout} style={{marginTop: "auto"}}>
+      <div className={activeLink === "cust" ? "active-location-link" : ""} val="cust" onClick={handleNavClick}>
+        Customers
+      </div>
+      <div className="sidebar-logout-btn" onClick={handleLogout}>
         logout
       </div>
 

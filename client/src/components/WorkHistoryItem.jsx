@@ -3,12 +3,15 @@ import '../styles/components/workhistoryitem.css';
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 
 const WorkHistoryItem = ({
+  date,
   title,
   amount,
-  description,
   status,
-  date,
+  worker,
+  photos,
+  address,
   customer,
+  description,
 }) => {
   const [rootClicked, setRootClicked] = useState(false);
 
@@ -22,18 +25,18 @@ const WorkHistoryItem = ({
       </button>
       {rootClicked && (
         <div className={`work-history-item-details ${rootClicked ? "open" : ""}`}>
-          <ul className="work-history-customer-details">
-            <li>{customer.CustomerName}</li>
-            <li>{customer.AddressMain}</li>
-            <li>{`${customer.City} (${customer.pincode})`}</li>
-            <li>{`${customer.State}, ${customer.Country}`}</li>
-            <li>{customer.Phone}</li>
-            <li>{customer.AltPhone}</li>
+          <ul className="work-customer-details">
+            <li>{customer.name}</li>
+            <li>{address.main}</li>
+            <li>{`${address.city} (${address.pincode})`}</li>
+            <li>{`${address.state}, ${address.country}`}</li>
+            <li>{address.phone}</li>
+            <li>{address.altPhone}</li>
           </ul>
-          <ul className="work-history-item-worker-details">
-            <li>Worker ID</li>
-            <li>Worker Name</li>
-            <li>Worker Phone</li>
+          <ul className="work-request-item-worker-detaills">
+            <li>{worker.name}</li>
+            <li>{worker.email}</li>
+            <li>{worker.phone ?? "Phone"}</li>
           </ul>
         </div>
       )}
@@ -44,16 +47,15 @@ const WorkHistoryItem = ({
       <p>{description}</p>
       {rootClicked && (
         <div className="work-history-item-images-container">
-          <span>Img1</span>
-          <span>Img2</span>
-          <span>Img3</span>
-          <span>Img4</span>
+          {photos.map((photo, idx) => (
+            <img src={photo} alt="Image" key={idx} />
+          ))}
         </div>
       )}
 
       <div className="work-history-item-footer">
         <span>
-          <h3 className={`work-history-item-status-${status}`}>{status}</h3>
+          <h3 className={`work-history-item-status-${status}`}>{status === "inProgress" ? "In Progress" : status}</h3>
         </span>
         <h3 className="work-history-item-date">{date}</h3>
       </div>

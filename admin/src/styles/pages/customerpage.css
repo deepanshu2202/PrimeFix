@@ -1,4 +1,5 @@
-.dashboard-root {
+
+.customer-page-root {
     width: calc(100vw - 150px);
     margin-left: 150px;
     height: 100vh;
@@ -7,11 +8,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-
-    transition: margin 0.3s;
 }
 
-.dashboard-nav {
+.customer-page-header {
     height: fit-content;
     background-color: var(--primary-bg);
     text-align: center;
@@ -21,83 +20,77 @@
     border-top-right-radius: 0.6rem;
 }
 
-.dashboard-head {
+.customer-page-filter-actions {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 0.4rem;
     background-color: #fff;
-    border-radius: 0.4rem;
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
     padding: 0.4rem;
 }
 
-.dashboard-head div {
+.customer-page-filter-actions div {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.customer-page-filter-actions div span, .customer-page-filter-btn {
     border: 1px solid rgb(0, 0, 0, 0.4);
     padding: 0.2rem 0.4rem;
     border-radius: 0.35rem;
     cursor: pointer;
-    transition: background 0.25s;
-}
-
-.dashboard-nav-updating-worker {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.4rem;
     background-color: #fff;
-    border-radius: 0.4rem;
-    padding: 0.4rem;
-}
-
-.dashboard-nav-updating-worker button {
-    border: 1px solid rgb(0, 0, 0, 0.4);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.35rem;
-    cursor: pointer;
     transition: background 0.25s;
-    font-size: 1rem;
 }
 
-.active-dash-filter-btn {
-    background-color: var(--primary-bg);
-    color: white;
+.customer-page-filter-btn.active {
+    background-color: var(--primary-bg) !important;
+    color: #fff;
     border: none !important;
 }
 
-.dashboard-nav-updating-worker input {
+.customer-page-active-span {
+    background-color: var(--primary-bg) !important;
+    color: #fff;
+    border: none !important;
+}
+
+.customer-page-filter-actions input {
     border: 1px solid rgb(0, 0, 0, 0.4);
     padding: 0.4rem;
     border-radius: 0.35rem;
 }
 
-.cancel-adding-worker {
-    margin-left: auto;
-}
-
-.dashboard-nav-updating-worker input:focus {
+.customer-page-filter-actions input:focus {
     outline: none;
 }
 
-.request-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    overflow-y: auto;
+.customer-page-filter-btn {
+    padding: 0.4rem;
 }
 
-.active-filter-btn {
-    border: none !important;
-    background-color: var(--primary-bg);
-    color: #fff;
+.customer-item-container {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+@media (max-width: 890px) {
+    .customer-page-filter-actions {
+        flex-direction: column;
+        align-items: flex-start;    
+    }
 }
 
 @media (max-width: 640px) {
-    .dashboard-root {
+    .customer-page-root {
         width: 100%;
         margin-left: 0;
-    }
-
-    .dash-h3s {
-        display: none;
     }
 }

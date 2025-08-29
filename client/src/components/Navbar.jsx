@@ -7,16 +7,18 @@ import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ConfirmWindow from "./ConfirmWindow";
 import { logoutUser } from "../utils/api";
+import { useDispatch, useSelector } from 'react-redux';
+import { resetUser } from "../redux/slice/userSlice";
 
 const Navbar = () => {
-  
+  const dispatch = useDispatch();
+  const role = useSelector((state) => state.user.role);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false); // testing
   const [profileClick, setProfileClick] = useState(false);
   const [sidebarIsOpen, setSideBarIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(window.scrollY > 580);
   const [onMobile, setOnMobile] = useState(window.innerWidth < 540);
-
 
   // useEffects
   useEffect(() => {
@@ -48,12 +50,13 @@ const Navbar = () => {
   const handleLogoutClick = async (e) => {
     e.preventDefault();
     await logoutUser();
+    dispatch(resetUser());
     navigate('/login');
   };
 
-  const handleLog = () => {
-    console.log("log clicked!");
-  };
+  // const handleLog = () => {
+  //   console.log("log clicked!");
+  // };
 
   // testing
   const handleConfirmClick = () => {
@@ -73,11 +76,11 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="nav-actions">
-          <div onClick={handleLog}>log</div>
+          {/* <div onClick={handleLog}>log</div> */}
           <div onClick={() => navigate("/")}>Home</div>
           <div onClick={() => navigate("/service")}>Services</div>
           <div onClick={() => navigate("/history")}>History</div>
-          <div onClick={() => navigate('/work')}>Work</div>
+          {(role === "admin" || role === "worker") && <div onClick={() => navigate('/work')}>Work</div>}
           <div onClick={() => setProfileClick((prev) => !prev)}>Profile</div>
         </div>
       )}

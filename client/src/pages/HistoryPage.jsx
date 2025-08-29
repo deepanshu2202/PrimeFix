@@ -70,7 +70,7 @@ const HistoryPage = () => {
           }
           onClick={() => {
             setFilteredTickets(
-              Object.values(tickets).flat().filter((ticket) => ticket.status === "inPrgress")
+              Object.values(tickets).flat().filter((ticket) => ticket.status === "inProgress")
             );
             setBtnClicked("inProgress");
           }}
@@ -118,7 +118,7 @@ const HistoryPage = () => {
             name={ticket.customer.name}
             description={ticket.description}
             date={new Date(ticket.createdAt).toLocaleString()}
-            worker={null}
+            worker={ticket.worker}
             handleCancelClick={handleCancelClick}
           />
         })}

@@ -21,3 +21,7 @@ export const bookTicket = async (data) =>
   });
 export const getAllTickets = async () => await api.get("/ticket/get");
 export const cancelTicket = async (data) => await api.put("/ticket/cancel", data);
+export const updateAmount = async (data) => await api.put("/ticket/amount", data);
+
+// work
+export const getWorkTickets = async () => await api.get("/ticket/getwork");

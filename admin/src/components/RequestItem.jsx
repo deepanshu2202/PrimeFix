@@ -2,15 +2,23 @@ import { useState } from "react";
 import "../styles/components/requestitem.css";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 
-const RequestItem = ({ title, amount, description, status, date, customer }) => {
-  const [workerId, setWorkerId] = useState("");
-  const [workerName, setWorkerName] = useState("");
-  const [workerPhone, setWorkerPhone] = useState("");
+const RequestItem = ({
+  id: ticketId,
+  title,
+  amount,
+  description,
+  status,
+  date,
+  customer,
+  address,
+  worker,
+  handleUpdate,
+  photos,
+}) => {
   const [rootClicked, setRootClicked] = useState(false);
 
-  const handleUpdateClick = () => {
-    console.log("update button clicked!");
-    setRootClicked(true);
+  const postHandleUpdate = () => {
+    handleUpdate(ticketId);
   };
 
   return (
@@ -19,23 +27,26 @@ const RequestItem = ({ title, amount, description, status, date, customer }) => 
         className="request-item-action"
         onClick={() => setRootClicked((p) => !p)}
       >
-        {rootClicked ? <IoCaretUp size={16}/> : <IoCaretDown size={16}/>}
+        {rootClicked ? <IoCaretUp size={16} /> : <IoCaretDown size={16} />}
       </button>
       {rootClicked && (
         <div className={`request-item-details ${rootClicked ? "open" : ""}`}>
           <ul className="customer-details">
-            <li>{customer.CustomerName}</li>
-            <li>{customer.AddressMain}</li>
-            <li>{`${customer.City} (${customer.pincode})`}</li>
-            <li>{`${customer.State}, ${customer.Country}`}</li>
-            <li>{customer.Phone}</li>
-            <li>{customer.AltPhone}</li>
+            <li>{customer.name}</li>
+            <li>{address.main}</li>
+            <li>{`${address.city} (${address.pincode})`}</li>
+            <li>{`${address.state}, ${address.country}`}</li>
+            <li>{address.phone}</li>
+            <li>{address.altPhone}</li>
           </ul>
-          <ul className="request-item-worker-detaills">
-            <li>Worker ID: {workerId}</li>
-            <li>Worker Name: {workerName}</li>
-            <li>Worker Phone: {workerPhone}</li>
-          </ul>
+          {(status === "inProgress" || status === "completed") && (
+            <ul className="request-item-worker-detaills">
+              <li>{worker.name ?? "WorkerName"}</li>
+              <li>{worker.email ?? "WorkerEmail"}</li>
+              <li>{worker.phone ?? "WorkerPhone"}</li>
+              <li>{worker.id ?? "WorkerId"}</li>
+            </ul>
+          )}
         </div>
       )}
       <div className="request-item-head">
@@ -45,43 +56,20 @@ const RequestItem = ({ title, amount, description, status, date, customer }) => 
       <p>{description}</p>
       {rootClicked && (
         <div className="request-item-images-container">
-          <span>Img1</span>
-          <span>Img2</span>
-          <span>Img3</span>
-          <span>Img4</span>
-        </div>
-      )}
-
-      {rootClicked && status === "Pending" && (
-        <div className="update-wrapper">
-        <h3 className="update-details-heading">Update Worker Details</h3>
-        <div className="request-update-form">
-
-          <label>
-            <h4>Worker ID:</h4>
-            <input type="text" value={workerId} onChange={(e) => setWorkerId(e.target.value)}/>
-          </label>
-          <label>
-            <h4>Worker Name:</h4>
-            <input type="text" value={workerName} onChange={(e) => setWorkerName(e.target.value)}/>
-          </label>
-          <label>
-            <h4>Worker Phone:</h4>
-            <input type="number" value={workerPhone} onChange={(e) => setWorkerPhone(e.target.value)}/>
-          </label>
-          <button className="update-worker-btn" onClick={handleUpdateClick}>Update</button>
-        </div>
+          {photos.map((photo, idx) => (
+            <img src={photo} alt="Image" key={idx}/>
+          ))}
         </div>
       )}
 
       <div className="request-item-footer">
         <span>
-          <h3 className={`request-item-status-${status}`}>{status}</h3>
-          {/* {status === "Pending" && (
-            <h3 className="cancel-service-btn" onClick={handleUpdateClick}>
+          <h3 className={`request-item-status-${status}`}>{status === "inProgress" ? "In Progress" : status}</h3>
+          {status === "pending" && (
+            <h3 className="cancel-service-btn" onClick={postHandleUpdate}>
               <u>Update</u>
             </h3>
-          )} */}
+          )}
         </span>
         <h3 className="request-item-date">{date}</h3>
       </div>

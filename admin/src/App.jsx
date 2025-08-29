@@ -8,6 +8,7 @@ import FeedbackPage from "./pages/FeedbackPage";
 import ComplaintPage from "./pages/ComplaintPage";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
+import CustomerPage from "./pages/CustomerPage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,17 @@ const router = createBrowserRouter([
     loader: authLoader,
   },
   {
+    // Customers
+    path: "/customers",
+    element: (
+      <>
+        <Sidebar />
+        <CustomerPage />
+      </>
+    ),
+    loader: authLoader,
+  },
+  {
     // Feedback
     path: "*",
     element: (
@@ -66,7 +78,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <div>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} hydrateFallbackElement={<div />}/>
     </div>
    
   );

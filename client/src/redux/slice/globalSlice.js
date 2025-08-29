@@ -6,6 +6,8 @@ const initialState = {
         title:"Plumbing Services",
     },
     allTickets: null,
+    workTickets: null,
+    socket: null,
 }
 
 export const globalSlice = createSlice({
@@ -18,10 +20,16 @@ export const globalSlice = createSlice({
         },
         setAllTickets : (state, actions) => {
             state.allTickets = actions.payload;
+        },
+        setWorkTickets: (state, actions) => {
+            state.workTickets = actions.payload;
+        },
+        setSocket: (state, actions) => {
+            state.socket = actions.payload;
         }
     },
 })
 
-export const { setSelectedService, setAllTickets } = globalSlice.actions;
+export const { setSelectedService, setAllTickets, setWorkTickets } = globalSlice.actions;
 
 export default globalSlice.reducer;

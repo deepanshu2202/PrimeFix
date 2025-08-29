@@ -74,7 +74,7 @@ export const updateProfile = async (req, res) => {
     }
 
     if (address) {
-      user.address = { 
+      user.address = {
         main: address.main || user.address.main,
         city: address.city || user.address.city,
         pincode: address.pincode || user.address.pincode,
@@ -124,7 +124,7 @@ export const loginAdmin = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Incorrect password" });
 
-    if (user.role !== 'admin')
+    if (user.role !== "admin")
       return res.status(400).json({ message: "Not authorized" });
 
     const token = generateToken(user._id);
@@ -145,8 +145,8 @@ export const loginAdmin = async (req, res) => {
 export const getAdmin = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    if (user.role !== 'admin') {
-      res.status(400),json({message: "Not authorized"});
+    if (user.role !== "admin") {
+      res.status(400), json({ message: "Not authorized" });
     }
     res.status(200).json(user);
   } catch (err) {
@@ -157,7 +157,54 @@ export const getAdmin = async (req, res) => {
 
 export const logoutAdmin = (req, res) => {
   res
-    .clearCookie("adminToken", { httpOnly: true, secure: true, sameSite: "strict" })
+    .clearCookie("adminToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    })
     .status(200)
     .json({ message: "Logged out successfully" });
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({ _id: { $ne: req.user._id } })
+      .select("-password")
+      .sort({ createdAt: -1 });
+    res.status(200).json(users);
+  } catch (err) {
+    console.log("Error in getAllUsers");
+    res.status(500).json({ message: "Error getting users" });
+  }
+};
+
+export const promoteUser = async (req, res) => {
+  const { password, userId } = req.body;
+
+  try {
+    const currUser = await User.findById(req.user._id);
+    if (!currUser) {
+      return res.status(400).json({ message: "Current user not found!" });
+    }
+
+    const isMatch = await bcrypt.compare(password, currUser.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect password" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: { role: "worker" } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Target user not found!" });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.log("Error in promoteUser:\n", err);
+    res.status(500).json({ message: "Error promoting user" });
+  }
 };

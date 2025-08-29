@@ -3,19 +3,26 @@ import '../styles/components/workrequestitem.css';
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 
 const WorkRequestItem = ({
+  id,
+  date,
   title,
   amount,
-  description,
   status,
-  date,
+  worker,
+  photos,
+  address,
   customer,
+  description,
+  updateFunction,
+  workAmount,
+  setWorkAmount,
 }) => {
-  const [workAmount, setWorkAmount] = useState("");
   const [rootClicked, setRootClicked] = useState(false);
 
-  const handleUpdateClick = () => {
+  const handleUpdateClick = async (e) => {
     console.log("update button clicked!");
     setRootClicked(true);
+    await updateFunction(e, id);
   };
 
   return (
@@ -29,17 +36,17 @@ const WorkRequestItem = ({
       {rootClicked && (
         <div className={`work-request-item-details ${rootClicked ? "open" : ""}`}>
           <ul className="work-customer-details">
-            <li>{customer.CustomerName}</li>
-            <li>{customer.AddressMain}</li>
-            <li>{`${customer.City} (${customer.pincode})`}</li>
-            <li>{`${customer.State}, ${customer.Country}`}</li>
-            <li>{customer.Phone}</li>
-            <li>{customer.AltPhone}</li>
+            <li>{customer.name}</li>
+            <li>{address.main}</li>
+            <li>{`${address.city} (${address.pincode})`}</li>
+            <li>{`${address.state}, ${address.country}`}</li>
+            <li>{address.phone}</li>
+            <li>{address.altPhone}</li>
           </ul>
           <ul className="work-request-item-worker-detaills">
-            <li>Worker ID</li>
-            <li>Worker Name</li>
-            <li>Worker Phone</li>
+            <li>{worker.name}</li>
+            <li>{worker.email}</li>
+            <li>{worker.phone ?? "Phone"}</li>
           </ul>
         </div>
       )}
@@ -50,14 +57,13 @@ const WorkRequestItem = ({
       <p>{description}</p>
       {rootClicked && (
         <div className="work-request-item-images-container">
-          <span>Img1</span>
-          <span>Img2</span>
-          <span>Img3</span>
-          <span>Img4</span>
+          {photos.map((photo, idx) => (
+            <img src={photo} alt="Image" key={idx} />
+          ))}
         </div>
       )}
 
-      {rootClicked && status === "In Progress" && (
+      {rootClicked && status === "inProgress" && (
         <div className="work-update-wrapper">
           <h3 className="work-update-details-heading">Update Details</h3>
           <div className="work-request-update-form">
@@ -78,7 +84,7 @@ const WorkRequestItem = ({
 
       <div className="work-request-item-footer">
         <span>
-          <h3 className={`work-request-item-status-${status}`}>{status}</h3>
+          <h3 className={`work-request-item-status-${status}`}>{status === "inProgress" ? "In Progress" : status}</h3>
         </span>
         <h3 className="work-request-item-date">{date}</h3>
       </div>

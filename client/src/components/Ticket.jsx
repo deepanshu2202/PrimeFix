@@ -10,7 +10,7 @@ const Ticket = ({
   worker,
   photos,
   status,
-  amount: charge,
+  charge,
   address,
   description,
   handleCancelClick,
@@ -28,6 +28,7 @@ const Ticket = ({
       {rootClicked && (
         <div className={`ticket-details ${rootClicked ? "open" : ""}`}>
           <ul className="customer-details">
+            <li><u>Customer Details</u></li>
             <li>{name}</li>
             <li>{address.main}</li>
             <li>{`${address.city} (${address.pincode})`}</li>
@@ -39,12 +40,13 @@ const Ticket = ({
           </ul>
           {worker ? (
             <ul className="worker-detaills">
-              <li>Worker ID</li>
-              <li>Worker Name</li>
-              <li>Worker Phone</li>
+              <li><u>Worker Details</u></li>
+              <li>{worker.name}</li>
+              <li>{worker.email}</li>
+              <li>{worker.id}</li>
             </ul>
           ) : (
-            <p>Pending Assignment</p>
+            (status !== "cancelled") && <p>Pending Assignment</p>
           )}
         </div>
       )}
@@ -65,7 +67,7 @@ const Ticket = ({
 
       <div className="ticket-footer">
         <span>
-          <h3 className={`ticket-status-${status}`}>{status}</h3>
+          <h3 className={`ticket-status-${status}`}>{status === "inProgress" ? "In Progress" : status}</h3>
           {status === "pending" && (
             <h3 className="cancel-service-btn" onClick={(e) => handleCancelClick(e, id)}>
               <u>Cancel</u>

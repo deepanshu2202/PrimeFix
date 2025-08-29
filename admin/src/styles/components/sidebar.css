@@ -28,6 +28,14 @@
     background-color: var(--dark-bg);
 }
 
+.active-location-link {
+    background-color: var(--dark-bg);
+}
+
+.sidebar-logout-btn {
+    margin-top: auto;
+}
+
 .sidebar-icon {
     display: none;
     position: fixed;
@@ -58,5 +66,9 @@
         display: block;
         background-color: var(--primary-bg);
         color:#fff;
+    }
+
+    .sidebar-logout-btn {
+        margin-top: 0;
     }
 }

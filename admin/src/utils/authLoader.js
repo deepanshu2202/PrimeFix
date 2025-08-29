@@ -1,7 +1,7 @@
-import { getAdmin } from "./api";
+import { getAdmin, getAllUsers, getAllTickets } from "./api";
 import store from "../redux/store/store";
 import { redirect } from "react-router-dom";
-import { setUser } from "../redux/slice/globalSlice";
+import { setUser, setAllUsers, setAllTickets } from "../redux/slice/globalSlice";
 
 const authLoader = async () => {
   const user = store.getState().global.user;
@@ -9,7 +9,16 @@ const authLoader = async () => {
     try {
       const res = await getAdmin();
       const currUser = res.data;
+      const resGetAllUsers = await getAllUsers();
+      const currAllUsers = resGetAllUsers.data;
+      const resTicket = await getAllTickets();
+      const currAllTickets = resTicket.data;
+
       store.dispatch(setUser({ currUser }));
+      store.dispatch(setAllUsers({ currAllUsers }));
+      store.dispatch(setAllTickets({ currAllTickets }));
+
+      // console.log("Curr All Tickets:\n", currAllTickets);
     } catch (err) {
       console.log("Error:", err);
       throw redirect("/login");

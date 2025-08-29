@@ -3,16 +3,19 @@ import "../styles/pages/servicepage.css";
 import { useEffect, useState } from "react";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setAllTickets } from "../redux/slice/globalSlice";
 
 // miscellaneous
 import { services } from "../utils/constants";
 import { bookTicket } from "../utils/api";
 
 const ServicePage = () => {
+  const dispatch = useDispatch();
   const name = useSelector((state) => state.user.name);
   const userSavedAddress = useSelector((state) => state.user.address);
   const selectedService = useSelector((state) => state.global.selectedService);
+  const tickets = useSelector((state) => state.global.allTickets);
 
   const [userCity, setUserCity] = useState("");
   const [userState, setUserState] = useState("");
@@ -62,6 +65,7 @@ const ServicePage = () => {
   // functions
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log("Images:", serviceImages);
 
     const formData = new FormData();
     formData.append("name", name);
@@ -88,7 +92,9 @@ const ServicePage = () => {
 
     try {
       const res = await bookTicket(formData);
-      console.log("Successfully booked! Response:\n", res.data);
+      const newTicket = res.data;
+      console.log("Successfully booked! Response:\n", newTicket);
+      dispatch(setAllTickets({newTicket, ...tickets}));
     } catch (err) {
       console.log("Error service booking:\n", err);
     }

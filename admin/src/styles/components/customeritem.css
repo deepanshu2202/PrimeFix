@@ -1,0 +1,71 @@
+
+.customer-item-root {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.customer-item-root ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.customer-item-address {
+    align-items: end !important;
+}
+
+.customer-item-role {
+    color: green;
+}
+
+.customer-item-role.worker {
+    color: #eeaf3a;
+}
+
+.customer-item-role.admin {
+    color: red;
+}
+
+.customer-item-promote-btn {
+    margin-top: auto;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.96rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.4rem;
+    color: #fff;
+    background-color: var(--primary-bg);
+    cursor: pointer;
+}
+
+.customer-item-promote-input {
+    margin-top: auto;
+    display: flex;
+    gap: 0.3rem;
+}
+
+.customer-item-promote-input input {
+    border: 1px solid rgb(0, 0, 0, 0.4);
+    padding: 0.2rem;
+    border-radius: 0.35rem;
+}
+
+.customer-item-promote-input button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.96rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.4rem;
+    color: #fff;
+    background-color: var(--primary-bg);
+    cursor: pointer;
+}
+
+.customer-item-promote-input input:focus {
+    outline: none;
+}
