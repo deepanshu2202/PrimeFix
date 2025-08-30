@@ -1,9 +1,9 @@
 import store from "./../redux/store/store";
 import { redirect } from "react-router-dom";
-import { setUser } from "../redux/slice/userSlice";
-import { setAllTickets, setSocket } from "../redux/slice/globalSlice";
 import { getAllTickets, getMe } from "./api";
-import { createSocket } from "./socket";
+import { setUser } from "../redux/slice/userSlice";
+import { setAllTickets } from "../redux/slice/globalSlice";
+// import { createSocket, socketInit } from "./socket";
 
 const authLoader = async () => {
   const user = store.getState().user.instance;
@@ -15,8 +15,10 @@ const authLoader = async () => {
       const ticketRes = await getAllTickets();
       const tickets = ticketRes.data;
 
+      // store only serializable data in Redux
       store.dispatch(
         setUser({
+          id: currUser._id,
           name: currUser.name,
           email: currUser.email,
           instance: currUser,
@@ -25,19 +27,21 @@ const authLoader = async () => {
         })
       );
 
-      store.dispatch(setAllTickets({tickets}));
+      store.dispatch(setAllTickets({ tickets }));
     } catch (err) {
       console.log("Error:", err);
       throw redirect("/login");
     }
   }
 
-  const socket = store.getState().global.socket;
-  if (!socket) {
-    const newSocket = createSocket();
+  // Initialize socket outside Redux
+  // const socket = createSocket();
+  // socketInit(socket);
 
-    store.dispatch(setSocket({newSocket}));
-  }
+  // Optional: store socket metadata only (if you need to track connection state in Redux)
+  // const isConnected = socket.connected;
+  // store.dispatch(setSocketMeta({ isConnected }));
+
   return null;
 };
 

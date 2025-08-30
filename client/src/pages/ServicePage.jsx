@@ -9,8 +9,12 @@ import { setAllTickets } from "../redux/slice/globalSlice";
 // miscellaneous
 import { services } from "../utils/constants";
 import { bookTicket } from "../utils/api";
+import { useSocket } from "../context/useSocket";
+import { serviceBooked } from "../utils/socket";
+import { toast } from 'react-hot-toast';
 
 const ServicePage = () => {
+  const socket = useSocket();
   const dispatch = useDispatch();
   const name = useSelector((state) => state.user.name);
   const userSavedAddress = useSelector((state) => state.user.address);
@@ -95,8 +99,11 @@ const ServicePage = () => {
       const newTicket = res.data;
       console.log("Successfully booked! Response:\n", newTicket);
       dispatch(setAllTickets({newTicket, ...tickets}));
+      serviceBooked(socket, newTicket);
+      toast.success("Successfully booked!");
     } catch (err) {
       console.log("Error service booking:\n", err);
+      toast.error("Error booking service");
     }
   };
 

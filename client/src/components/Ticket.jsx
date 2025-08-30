@@ -46,7 +46,7 @@ const Ticket = ({
               <li>{worker.id}</li>
             </ul>
           ) : (
-            (status !== "cancelled") && <p>Pending Assignment</p>
+            (status !== "cancelled") ? <p>Pending Assignment</p> : <p>Cancelled</p>
           )}
         </div>
       )}

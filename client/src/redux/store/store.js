@@ -7,6 +7,13 @@ const store = configureStore({
     user: userReducer,
     global: globalReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["global/setSocket"], // ignore this action
+        ignoredPaths: ["global.newSocket"],   // ignore this slice field
+      },
+    }),
 });
 
 export default store;

@@ -5,8 +5,11 @@ import WorkHistoryItem from "../components/WorkHistoryItem";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAmount } from "../utils/api";
 import { setWorkTickets } from "../redux/slice/globalSlice";
+import { useSocket } from "../context/useSocket";
+import { serviceCompleted } from "../utils/socket";
 
 const WorkPage = () => {
+  const socket = useSocket();
   const dispatch = useDispatch();
   const [workAmount, setWorkAmount] = useState("");
   const [isRequest, setIsRequest] = useState(true);
@@ -25,7 +28,8 @@ const WorkPage = () => {
     };
 
     try {
-      const newTicket = await updateAmount(data);
+      const res = await updateAmount(data);
+      const newTicket = res.data;
       console.log("Updated successfull", newTicket);
       const updatedTickets = Object.values(tickets)
         .flat()
@@ -37,6 +41,7 @@ const WorkPage = () => {
 
       dispatch(setWorkTickets({ updatedTickets }));
       setWorkAmount("");
+      serviceCompleted(socket, newTicket);
     } catch (err) {
       console.log(err);
     }

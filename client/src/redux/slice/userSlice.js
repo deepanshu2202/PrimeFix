@@ -4,6 +4,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     instance: null,
+    id: "",
     name: "",
     email: "",
     role: "",
@@ -19,6 +20,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     setUser: (state, actions) => {
+      state.id = actions.payload.id || state.id;
       state.name = actions.payload.name || state.name;
       state.email = actions.payload.email || state.email;
       state.role = actions.payload.role || state.role;

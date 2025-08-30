@@ -7,7 +7,7 @@ const CustomerItem = ({ id, role, name, email, address, promoteFunction, isUpdat
 
   const handleSubmit = (e) => {
     setPassword(""); 
-    promoteFunction(e, id, name, email, address, password);
+    promoteFunction(e, id, password, name, email, address);
   }
 
   return (

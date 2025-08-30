@@ -34,8 +34,9 @@ const CustomerPage = () => {
 
   const handleUserPromotion = async (e, id, password) => {
     e.preventDefault();
+    console.log("pass:", password);
     try {
-      const newUser = await promoteUser({ password, userId: id });
+      const newUser = await promoteUser({  userId: id, password });
       console.log("Sucess promoting user!\n", newUser);
 
       const updatedUsers = Object.values(users)

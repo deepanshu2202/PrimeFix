@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { cancelTicket } from "../utils/api";
 import { setAllTickets } from "../redux/slice/globalSlice";
 import { useEffect } from "react";
+import { serviceCancelled } from "../utils/socket";
+import { useSocket } from './../context/useSocket';
 
 const HistoryPage = () => {
+  const socket = useSocket();
   const dispatch = useDispatch();
   const [btnClicked, setBtnClicked] = useState("all");
   const tickets = useSelector((state) => state.global.allTickets);
@@ -16,17 +19,17 @@ const HistoryPage = () => {
     e.preventDefault();
     try {
       await cancelTicket({ ticketId: id });
-      // console.log("New Ticket:", newTicket);
+      let cancelledTicket;
   
       const updatedTickets = Object.values(tickets).flat().map((ticket) => {
         if (ticket._id === id) {
-          return { ...ticket, status: "cancelled" }; 
+          return cancelledTicket = { ...ticket, status: "cancelled" }; 
         }
         return ticket;
       });
 
-      // console.log(updatedTickets);
       dispatch(setAllTickets({updatedTickets}));
+      serviceCancelled(socket, cancelledTicket);
     } catch (err) {
       console.log("Error cancelling ticket:", err);
     }

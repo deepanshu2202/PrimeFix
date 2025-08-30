@@ -5,8 +5,11 @@ import { setAllTickets } from "../redux/slice/globalSlice";
 import RequestItem from "./../components/RequestItem";
 import CustomerItem from "../components/CustomerItem";
 import { addWorker } from "../utils/api";
+import { useSocket } from "../context/useSocket";
+import { workerAssigned } from './../utils/socket';
 
 const Dashboard = () => {
+  const socket = useSocket();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.global.allUsers);
   const requests = useSelector((state) => state.global.allTickets);
@@ -48,7 +51,7 @@ const Dashboard = () => {
     );
   };
 
-  const handleAddWorker = async (e, id, name, email, address, password) => {
+  const handleAddWorker = async (e, id, password, name, email, address) => {
     e.preventDefault();
     console.log("selectedTicketId:", selectedTicketId);
     const data = {
@@ -58,7 +61,8 @@ const Dashboard = () => {
     };
 
     try {
-      const newTicket = await addWorker(data);
+      const res = await addWorker(data);
+      const newTicket = res.data;
       console.log("Worker added successfully!");
       console.log("UpdatedTicket, ", newTicket);
       const updatedTickets = Object.values(requests)
@@ -79,6 +83,7 @@ const Dashboard = () => {
         );
       dispatch(setAllTickets({ updatedTickets }));
       setIsUpdating(false);
+      workerAssigned(socket, newTicket);
     } catch (err) {
       console.log("Ticket Update Error:", err);
     }
