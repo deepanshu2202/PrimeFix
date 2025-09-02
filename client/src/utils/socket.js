@@ -14,8 +14,6 @@ export const createSocket = () => {
 export const socketInit = (socket) => {
     socket.on("connect", () => {
         const userId = store.getState().user.id;
-        console.log("New socket connected:", socket.id);
-        console.log("New user connected:", userId);
         socket.emit("register", userId);
     });
 
@@ -55,7 +53,6 @@ export const socketInit = (socket) => {
 
 export const serviceBooked = (socket, ticket) => {
     const event = "New Service Booked - to server";
-    console.log("Emmiting event:", event);
     socket.emit(event, ticket);
 }
 

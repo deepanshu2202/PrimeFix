@@ -7,6 +7,7 @@ import { updateAmount } from "../utils/api";
 import { setWorkTickets } from "../redux/slice/globalSlice";
 import { useSocket } from "../context/useSocket";
 import { serviceCompleted } from "../utils/socket";
+import { toast } from 'react-hot-toast';
 
 const WorkPage = () => {
   const socket = useSocket();
@@ -42,8 +43,10 @@ const WorkPage = () => {
       dispatch(setWorkTickets({ updatedTickets }));
       setWorkAmount("");
       serviceCompleted(socket, newTicket);
+      toast.success("Updated successfully");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      toast.err(err.response.data.message);
     }
   };
 

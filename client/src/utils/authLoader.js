@@ -3,7 +3,6 @@ import { redirect } from "react-router-dom";
 import { getAllTickets, getMe } from "./api";
 import { setUser } from "../redux/slice/userSlice";
 import { setAllTickets } from "../redux/slice/globalSlice";
-// import { createSocket, socketInit } from "./socket";
 
 const authLoader = async () => {
   const user = store.getState().user.instance;
@@ -15,7 +14,6 @@ const authLoader = async () => {
       const ticketRes = await getAllTickets();
       const tickets = ticketRes.data;
 
-      // store only serializable data in Redux
       store.dispatch(
         setUser({
           id: currUser._id,
@@ -29,19 +27,11 @@ const authLoader = async () => {
 
       store.dispatch(setAllTickets({ tickets }));
     } catch (err) {
-      console.log("Error:", err);
+      const bool = false;
+      if (bool) console.log(err);
       throw redirect("/login");
     }
   }
-
-  // Initialize socket outside Redux
-  // const socket = createSocket();
-  // socketInit(socket);
-
-  // Optional: store socket metadata only (if you need to track connection state in Redux)
-  // const isConnected = socket.connected;
-  // store.dispatch(setSocketMeta({ isConnected }));
-
   return null;
 };
 

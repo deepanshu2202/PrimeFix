@@ -8,12 +8,15 @@ import { setUser } from "../redux/slice/userSlice";
 
 import { updateProfile } from "../utils/api";
 import { toast } from 'react-hot-toast';
+import ConfirmWindow from "../components/ConfirmWindow";
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user);
   const userSavedAddress = user.address;
   const dispatch = useDispatch();
 
+  const [event, setEvent] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [userCity, setUserCity] = useState("");
   const [username, setUsername] = useState("");
   const [userState, setUserState] = useState("");
@@ -24,16 +27,16 @@ const ProfilePage = () => {
   const [userAltPhoneNumber, setUserAltPhoneNumber] = useState("");
 
   // functions
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    event.preventDefault();
 
     const newAddress = {
-      main: userAddress || userSavedAddress.main,
       city: userCity || userSavedAddress.city,
-      pincode: cityPincode || userSavedAddress.pincode,
+      main: userAddress || userSavedAddress.main,
       state: userState || userSavedAddress.state,
       country: userCountry || userSavedAddress.country,
       phone: userPhoneNumber || userSavedAddress.phone,
+      pincode: cityPincode || userSavedAddress.pincode,
       altPhone: userAltPhoneNumber || userSavedAddress.altPhone,
     }
 
@@ -51,14 +54,20 @@ const ProfilePage = () => {
       setUserAltPhoneNumber("");
 
     } catch (err) {
-      toast.error("Error updating details");
-      console.log("Error Updating profile: ", err);
+      toast.error(err.response.data.message);
+    } finally {
+      setIsOpen(false);
     }
   };
 
+  const handleFormSubmit = (e) => {
+    setIsOpen(true);
+    setEvent(e);
+  }
+
   return (
     <div className="profilepage-root">
-      <form onSubmit={handleSubmit}>
+      <div className="form-div">
         <div className="profile-details-container">
           <h1>Personal Details</h1>
           <label className="profile-name">
@@ -76,9 +85,7 @@ const ProfilePage = () => {
             <input type="text" value={user.email} readOnly />
           </label>
 
-          <div className="profile-empty-space">
-            Theme maybe
-          </div>
+          <div className="profile-empty-space"></div>
         </div>
 
         <div className="profile-address-container">
@@ -156,11 +163,17 @@ const ProfilePage = () => {
             />
           </label>
 
-          <button type="submit" className="update-btn">
+          <span className="update-btn" onClick={handleFormSubmit}>
             Update profile
-          </button>
+          </span>
         </div>
-      </form>
+      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} 
+        message="Do you want to save the changes to your profile?" 
+        confirmFunction={handleSubmit} 
+      />
+      </div>
+
+
     </div>
   );
 };

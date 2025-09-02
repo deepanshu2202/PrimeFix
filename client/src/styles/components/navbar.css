@@ -36,6 +36,10 @@
   border-bottom: 1px solid white;
 }
 
+.active-window-btn {
+  border-bottom: 1px solid #fff;
+}
+
 .profile-menu {
   position: fixed;
   top: 8%;
@@ -47,7 +51,7 @@
   flex-direction: column;
   align-items: flex-start;
   font-size: 1.1rem;
-  border-radius: 0.4rem;
+  /* border-radius: 0.4rem; */
   padding: 0.1rem;
 
   animation: fadeIn 0.3s ease-in-out;
@@ -68,6 +72,10 @@
   cursor: pointer;
   padding: 0.4rem;
   width: 100%;
+}
+
+.profile-menu div:first-child {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
 }
 
 .profile-menu div:hover {
@@ -94,6 +102,8 @@
   align-items: flex-start;
   justify-content: space-between;
   transition: right 0.5s;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
 }
 
 .nav-actions-mobile div {

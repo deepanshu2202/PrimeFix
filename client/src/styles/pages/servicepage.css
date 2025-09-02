@@ -7,6 +7,16 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-top: 11vh;
   background-color: #3d526d;
+  animation: fadeIn 0.3s ease-in-out
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Form styling */

@@ -65,7 +65,7 @@ const WorkRequestItem = ({
 
       {rootClicked && status === "inProgress" && (
         <div className="work-update-wrapper">
-          <h3 className="work-update-details-heading">Update Details</h3>
+          <h3 className="work-update-details-heading">Update Amount</h3>
           <div className="work-request-update-form">
             <label>
               <h4>Amount:</h4>

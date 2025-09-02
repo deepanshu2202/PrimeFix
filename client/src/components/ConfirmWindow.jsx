@@ -4,7 +4,7 @@ const ConfirmWindow = ({ isOpen, setIsOpen, message, confirmFunction }) => {
   return (
     <div className={`confirm-window-root ${isOpen ? "open" : ""}`}>
       <div className="window-container">
-        <p>Do you really want to {message}?</p>
+        <p>{message}</p>
         <div className="confirm-window-actions">
           <button
             className="cancel-window-btn"

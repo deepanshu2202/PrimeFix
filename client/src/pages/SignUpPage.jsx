@@ -16,8 +16,13 @@ const SignUpPage = () => {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
+    if (password.length < 6) {
+      toast.error("Password should contain atleast 6 characters");
+      return;
+    }
+
     if (password !== confirmPassword) {
-      toast.error("passwords are different");
+      toast.error("Passwords should be the same");
       return;
     }
 
@@ -25,8 +30,11 @@ const SignUpPage = () => {
       const data = {name, email, password};
       await signUpUser(data);
       navigate('/');
+      toast.success("Account created successfully");
     } catch (err) {
-      console.log("SignUpError: ", err);
+      const msg = err.response.data.message;
+      // console.log("SignUpError: ", err.response);
+      toast.error(msg);
     }
   };
 

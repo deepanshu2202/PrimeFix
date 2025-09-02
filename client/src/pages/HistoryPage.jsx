@@ -7,22 +7,29 @@ import { setAllTickets } from "../redux/slice/globalSlice";
 import { useEffect } from "react";
 import { serviceCancelled } from "../utils/socket";
 import { useSocket } from './../context/useSocket';
+import ConfirmWindow from "../components/ConfirmWindow";
+import toast from "react-hot-toast";
 
 const HistoryPage = () => {
   const socket = useSocket();
   const dispatch = useDispatch();
+
+
+  const [currId, setCurrId] = useState(""); 
+  const [event, setEvent] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [btnClicked, setBtnClicked] = useState("all");
   const tickets = useSelector((state) => state.global.allTickets);
   const [filteredTickets, setFilteredTickets] = useState(tickets);
 
-  const handleCancelClick = async (e, id) => {
-    e.preventDefault();
+  const handleCancelClick = async () => {
+    event.preventDefault();
     try {
-      await cancelTicket({ ticketId: id });
+      await cancelTicket({ ticketId: currId });
       let cancelledTicket;
   
       const updatedTickets = Object.values(tickets).flat().map((ticket) => {
-        if (ticket._id === id) {
+        if (ticket._id === currId) {
           return cancelledTicket = { ...ticket, status: "cancelled" }; 
         }
         return ticket;
@@ -30,9 +37,19 @@ const HistoryPage = () => {
 
       dispatch(setAllTickets({updatedTickets}));
       serviceCancelled(socket, cancelledTicket);
+      toast.success("Service cancelled successfully");
     } catch (err) {
-      console.log("Error cancelling ticket:", err);
+      // console.log("Error cancelling ticket:", err);
+      toast.error(err.response.data.message);
+    } finally {
+      setIsOpen(false);
     }
+  }
+
+  const handlePreCancel = (e, id) => {
+    setEvent(e);
+    setCurrId(id);
+    setIsOpen(true);
   }
 
   useEffect(() => {
@@ -122,10 +139,17 @@ const HistoryPage = () => {
             description={ticket.description}
             date={new Date(ticket.createdAt).toLocaleString()}
             worker={ticket.worker}
-            handleCancelClick={handleCancelClick}
+            // handleCancelClick={handleCancelClick}
+            handleCancelClick={handlePreCancel}
           />
         })}
       </div>
+
+      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} 
+        message="Are you sure you want to cancel this service?" 
+        confirmFunction={handleCancelClick} 
+      />
+
     </div>
   );
 };

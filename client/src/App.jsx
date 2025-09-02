@@ -68,7 +68,7 @@ const App = () => {
   return (
     <div className="app-root">
       <Suspense fallback={<Loader />}>
-        <RouterProvider router={router} HydrateFallback={<Loader />} />
+        <RouterProvider router={router} fallback={<Loader />} />
       </Suspense>
       <Toaster />
     </div>

@@ -3,6 +3,7 @@ import loginImg from "../assets/login-img.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../utils/api";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -15,9 +16,12 @@ const LoginPage = () => {
     try {
       const data = { email, password };
       await loginUser(data);
+      toast.success("Welcome back!");
       navigate('/');
     } catch (err) {
-      console.log("LoginError:", err);
+      const msg = err.response.data.message
+      // console.log("LoginError:", msg);
+      toast.error(msg);
     }
   };
 

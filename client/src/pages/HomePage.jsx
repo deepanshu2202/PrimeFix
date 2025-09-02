@@ -3,14 +3,6 @@ import "../styles/pages/homepage.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Icons
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
-
 import { FaTools } from "react-icons/fa";
 import { TbClockPin } from "react-icons/tb";
 import { GrUserExpert } from "react-icons/gr";
@@ -28,6 +20,7 @@ import { setSelectedService } from "../redux/slice/globalSlice";
 
 // Miscellaneous
 import { services, faqs } from "../utils/constants";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -59,9 +52,10 @@ const HomePage = () => {
   };
 
   const handleContactSubmit = () => {
-    console.log("Text Entered:", contactText);
     setContactText("");
-    console.log(window.scrollY);
+    toggleActiveContactButton ? 
+    toast.success("Thank you for your feedback 🙏") : 
+    toast("We’ve received your complaint. Our team will look into it.");
   };
 
   return (

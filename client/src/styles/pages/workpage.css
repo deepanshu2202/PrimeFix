@@ -5,6 +5,16 @@
     padding: 0.5rem 0.8rem;
     padding-bottom: 1rem;
     background-color: var(--gray-bg);
+  animation: fadeIn 0.3s ease-in-out
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .workpage-head {

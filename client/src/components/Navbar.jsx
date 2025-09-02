@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ConfirmWindow from "./ConfirmWindow";
 import { logoutUser } from "../utils/api";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../redux/slice/userSlice";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -50,19 +51,13 @@ const Navbar = () => {
   const handleLogoutClick = async (e) => {
     e.preventDefault();
     await logoutUser();
+    setIsOpen(false);
     dispatch(resetUser());
-    navigate('/login');
+    navigate("/login");
+    toast.success("You’re logged out");
   };
 
-  // const handleLog = () => {
-  //   console.log("log clicked!");
-  // };
-
-  // testing
-  const handleConfirmClick = () => {
-    console.log("Confirm clicked!");
-    setIsOpen(false);
-  }
+  // const handleLog = () => {}
 
   return (
     <div className={`nav-root ${scrolled ? "scrolled" : ""}`}>
@@ -77,10 +72,40 @@ const Navbar = () => {
       ) : (
         <div className="nav-actions">
           {/* <div onClick={handleLog}>log</div> */}
-          <div onClick={() => navigate("/")}>Home</div>
-          <div onClick={() => navigate("/service")}>Services</div>
-          <div onClick={() => navigate("/history")}>History</div>
-          {(role === "admin" || role === "worker") && <div onClick={() => navigate('/work')}>Work</div>}
+          <div
+            className={
+              window.location.pathname === "/" ? "active-window-btn" : ""
+            }
+            onClick={() => navigate("/")}
+          >
+            Home
+          </div>
+          <div
+            className={
+              window.location.pathname === "/service" ? "active-window-btn" : ""
+            }
+            onClick={() => navigate("/service")}
+          >
+            Services
+          </div>
+          <div
+            className={
+              window.location.pathname === "/history" ? "active-window-btn" : ""
+            }
+            onClick={() => navigate("/history")}
+          >
+            History
+          </div>
+          {(role === "admin" || role === "worker") && (
+            <div
+              className={
+                window.location.pathname === "/work" ? "active-window-btn" : ""
+              }
+              onClick={() => navigate("/work")}
+            >
+              Work
+            </div>
+          )}
           <div onClick={() => setProfileClick((prev) => !prev)}>Profile</div>
         </div>
       )}
@@ -109,7 +134,7 @@ const Navbar = () => {
             Profile
           </div>
         </div>
-        <div className="mobile-logout-btn" onClick={handleLogoutClick}>
+        <div className="mobile-logout-btn" onClick={() => setIsOpen(true)}>
           Logout
         </div>
       </div>
@@ -124,12 +149,16 @@ const Navbar = () => {
           >
             Edit profile
           </div>
-          <div onClick={handleLogoutClick}>logout</div>
+          <div onClick={() => setIsOpen(true)}>logout</div>
         </div>
       )}
 
-      {/* testing */}
-      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} message="on navbar" confirmFunction={handleConfirmClick} />
+      <ConfirmWindow
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        message="Are you sure you want to log out?"
+        confirmFunction={handleLogoutClick}
+      />
     </div>
   );
 };

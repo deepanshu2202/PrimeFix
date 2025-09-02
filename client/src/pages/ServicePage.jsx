@@ -21,6 +21,7 @@ const ServicePage = () => {
   const selectedService = useSelector((state) => state.global.selectedService);
   const tickets = useSelector((state) => state.global.allTickets);
 
+  const [isBooking, setIsBooking] = useState(false);
   const [userCity, setUserCity] = useState("");
   const [userState, setUserState] = useState("");
   const [checkbox, setCheckbox] = useState(false);
@@ -69,7 +70,8 @@ const ServicePage = () => {
   // functions
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("Images:", serviceImages);
+    setIsBooking(true);
+    // console.log("Images:", serviceImages);
 
     const formData = new FormData();
     formData.append("name", name);
@@ -90,6 +92,13 @@ const ServicePage = () => {
 
     if (serviceImages) {
       for (let i = 0; i < Math.min(serviceImages.length, 6); i++) {
+        const currImage = serviceImages[i].name.split(".");
+        const imgFormat = currImage[currImage.length - 1];
+        if (imgFormat !== "png" && imgFormat !== "jpg" && imgFormat !== "jpeg") {
+          toast.error("unsupported file format");
+          return;
+        }
+
         formData.append("photos", serviceImages[i]);
       }
     }
@@ -97,13 +106,14 @@ const ServicePage = () => {
     try {
       const res = await bookTicket(formData);
       const newTicket = res.data;
-      console.log("Successfully booked! Response:\n", newTicket);
       dispatch(setAllTickets({newTicket, ...tickets}));
       serviceBooked(socket, newTicket);
       toast.success("Successfully booked!");
     } catch (err) {
-      console.log("Error service booking:\n", err);
-      toast.error("Error booking service");
+      // console.log("Error service booking:\n", err);
+      toast.error(err.response.message.data);
+    } finally {
+      setIsBooking(false);
     }
   };
 
@@ -246,7 +256,7 @@ const ServicePage = () => {
           </label>
 
           <button type="submit" className="submit-btn">
-            Book Service
+            {isBooking ? "Booking....." : "Book Service"}
           </button>
         </div>
       </form>
