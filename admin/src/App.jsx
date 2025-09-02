@@ -9,6 +9,8 @@ import ComplaintPage from "./pages/ComplaintPage";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
+import Loader from './components/Loader';
+import { Toaster } from 'react-hot-toast';
 
 const router = createBrowserRouter([
   {
@@ -78,9 +80,9 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <div>
-      <RouterProvider router={router} hydrateFallbackElement={<div />}/>
+      <RouterProvider router={router} fallback={<Loader />}/>
+      <Toaster />
     </div>
-   
   );
 };
 

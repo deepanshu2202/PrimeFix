@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/components/customeritem.css";
 
-const CustomerItem = ({ id, role, name, email, address, promoteFunction, isUpdating }) => {
+const CustomerItem = ({ id, role, name, email, address, promoteFunction, isUpdating, onReq }) => {
   const [password, setPassword] = useState("");
   const [isPromoting, setIsPromoting] = useState(true);
 
@@ -15,9 +15,9 @@ const CustomerItem = ({ id, role, name, email, address, promoteFunction, isUpdat
       <ul className="customer-item-details">
         <li>{name ?? "Name"}</li>
         <li>{email ?? "Email"}</li>
-        <li
+        {!onReq && <li
           className={`customer-item-role ${role}`}
-        >{`(${role.toUpperCase()})`}</li>
+        >{`(${role.toUpperCase()})`}</li>}
         {(role === "user" || isUpdating) && (isPromoting ? (
           <li
             className="customer-item-promote-btn"

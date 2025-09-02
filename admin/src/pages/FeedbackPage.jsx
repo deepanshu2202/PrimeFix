@@ -7,28 +7,7 @@ const FeedbackPage = () => {
       <div className="feedback-page-header">
         <h1>FEEDBACKS</h1>
       </div>
-      <div className="feedback-item-container">
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text" />
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-      </div>
+      <div className="feedback-item-container"></div>
     </div>
   )
 }

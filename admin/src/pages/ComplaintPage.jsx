@@ -7,28 +7,7 @@ const ComplaintPage = () => {
       <div className="complaint-page-header">
         <h1>COMPLAINTS</h1>
       </div>
-      <div className="complaint-item-container">
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text" />
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-        <ReviewItem customer={{name:"name", email:"email", phone:"phone"}} text="This is a text"/>
-      </div>
+      <div className="complaint-item-container"></div>
     </div>
   )
 }

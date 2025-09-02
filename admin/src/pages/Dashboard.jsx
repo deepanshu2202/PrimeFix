@@ -7,6 +7,7 @@ import CustomerItem from "../components/CustomerItem";
 import { addWorker } from "../utils/api";
 import { useSocket } from "../context/useSocket";
 import { workerAssigned } from './../utils/socket';
+import { toast } from 'react-hot-toast';
 
 const Dashboard = () => {
   const socket = useSocket();
@@ -53,7 +54,6 @@ const Dashboard = () => {
 
   const handleAddWorker = async (e, id, password, name, email, address) => {
     e.preventDefault();
-    console.log("selectedTicketId:", selectedTicketId);
     const data = {
       password: password,
       ticketId: selectedTicketId,
@@ -84,8 +84,10 @@ const Dashboard = () => {
       dispatch(setAllTickets({ updatedTickets }));
       setIsUpdating(false);
       workerAssigned(socket, newTicket);
+      toast.success("Assigned Successfully");
     } catch (err) {
-      console.log("Ticket Update Error:", err);
+      // console.log("Ticket Update Error:", err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -200,6 +202,7 @@ const Dashboard = () => {
                   address={user.address}
                   promoteFunction={handleAddWorker}
                   isUpdating={true}
+                  onReq={true}
                 />
               ))}
           </div>
@@ -214,7 +217,7 @@ const Dashboard = () => {
                 <RequestItem
                   id={request._id}
                   key={idx}
-                  title={request.category}
+                  title={request.category.split(".")[1]}
                   description={request.description}
                   status={request.status}
                   amount={request.charge}

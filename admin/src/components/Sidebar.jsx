@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { useState } from "react";
 import { logoutAdmin } from "../utils/api";
+import { toast } from 'react-hot-toast';
+import ConfirmWindow from './ConfirmWindow';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState("dash");
   const [isOpen, setIsOpen] = useState(false);
+  const [isWOpen, setWIsOpen] = useState(false);
 
   const handleNavClick = (e) => {
     const val = e.target.getAttribute("val");
@@ -21,14 +24,16 @@ const Sidebar = () => {
     setIsOpen(false);
   };
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
-
+  const handleLogout = async () => {
     try {
       await logoutAdmin();
       navigate("/login");
+      toast.success("You’re logged out");
     } catch (err) {
-      console.log("Admin Logout Error:\n", err.response.data.message);
+      // console.log("Admin Logout Error:\n", err.response.data.message);
+      toast.error(err.response.data.message);
+    } finally {
+      setWIsOpen(false);
     }
   }
 
@@ -47,7 +52,7 @@ const Sidebar = () => {
       <div className={activeLink === "cust" ? "active-location-link" : ""} val="cust" onClick={handleNavClick}>
         Customers
       </div>
-      <div className="sidebar-logout-btn" onClick={handleLogout}>
+      <div className="sidebar-logout-btn" onClick={() => setWIsOpen(true)}>
         logout
       </div>
 
@@ -61,6 +66,13 @@ const Sidebar = () => {
           <FaAngleDoubleRight size={36} />
         )}
       </span>
+
+      <ConfirmWindow
+        isOpen={isWOpen}
+        setIsOpen={setWIsOpen}
+        message="Are you sure you want to log out?"
+        confirmFunction={handleLogout}
+      />
     </div>
   );
 };

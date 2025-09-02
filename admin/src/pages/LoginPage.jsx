@@ -3,6 +3,7 @@ import loginImg from "../assets/login-img.png";
 import { useState } from "react";
 import { loginAdmin } from "../utils/api";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,8 +18,10 @@ const LoginPage = () => {
     try {
       await loginAdmin(data);
       navigate('/');
+      toast.success("Welcome back!");
     } catch (err) {
-      console.log("AdminLogin error: ", err)
+      // console.log("AdminLogin error: ", err)
+      toast.error(err.response.data.message);
     }
   };
 

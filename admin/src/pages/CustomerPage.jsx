@@ -4,11 +4,17 @@ import { useState, useEffect } from "react";
 import CustomerItem from "../components/CustomerItem";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllUsers } from "../redux/slice/globalSlice";
+import ConfirmWindow from '../components/ConfirmWindow';
+import { toast } from 'react-hot-toast';
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.global.allUsers);
 
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [event, setEvent] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [activeFilterBtn, setActiveFilterBtn] = useState("all");
@@ -32,20 +38,22 @@ const CustomerPage = () => {
     setFilteredUsers(newFiltered);
   };
 
-  const handleUserPromotion = async (e, id, password) => {
-    e.preventDefault();
-    console.log("pass:", password);
+  const handleUserPromotion = async () => {
+    event.preventDefault();
     try {
-      const newUser = await promoteUser({  userId: id, password });
-      console.log("Sucess promoting user!\n", newUser);
+      await promoteUser({  userId: id, password });
 
       const updatedUsers = Object.values(users)
         .flat()
         .map((user) => (user._id === id ? { ...user, role: "worker" } : user));
 
       dispatch(setAllUsers({ updatedUsers }));
+      toast.success("user promoted successfully");
     } catch (err) {
-      console.log("Error promoting user!", err);
+      // console.log("Error promoting user!", err);
+      toast.error(err.response.data.message);
+    } finally {
+      setIsOpen(false);
     }
   };
 
@@ -68,6 +76,13 @@ const CustomerPage = () => {
         )
     );
   };
+
+  const handlePreUserPromotion = (e, id, password) => {
+    setId(id);
+    setEvent(e);
+    setPassword(password);
+    setIsOpen(true);
+  }
 
   useEffect(() => {
     setBaseFilteredUsers(users);
@@ -146,10 +161,18 @@ const CustomerPage = () => {
               name={user.name}
               email={user.email}
               address={user.address}
-              promoteFunction={handleUserPromotion}
+              promoteFunction={handlePreUserPromotion}
             />
           ))}
       </div>
+
+      <ConfirmWindow
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        message="You sure want to promote this user?"
+        confirmFunction={handleUserPromotion}
+      />
+
     </div>
   );
 };

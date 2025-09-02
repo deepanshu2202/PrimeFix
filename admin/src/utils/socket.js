@@ -13,13 +13,10 @@ export const createSocket = () => {
 
 export const socketInit = (socket) => {
   socket.on("connect", () => {
-    console.log("New socket connected:", socket.id);
-
     socket.emit("register - admin");
   });
 
   socket.on("New Service Booked - to admin", (ticket) => {
-    // console.log("Service booked event received by admins");
     const allTickets = store.getState().global.allTickets;
     store.dispatch(setAllTickets({ ticket, ...allTickets }));
   });
@@ -43,6 +40,5 @@ export const socketInit = (socket) => {
 
 export const workerAssigned = (socket, ticket) => {
   const event = "Worker Assigned - to server";
-  console.log("Emmiting event:", event);
   socket.emit(event, ticket);
 };
