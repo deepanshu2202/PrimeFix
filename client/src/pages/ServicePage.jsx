@@ -36,9 +36,7 @@ const ServicePage = () => {
     `${selectedService.id}. ${selectedService.title}`
   );
 
-  // useEffects
-  useEffect(() => {
-    const setAddress = () => {
+  const setAddress = () => {
       setUserCity(userSavedAddress.city);
       setUserState(userSavedAddress.state);
       setUserAddress(userSavedAddress.main);
@@ -58,6 +56,8 @@ const ServicePage = () => {
       setUserAltPhoneNumber("");
     };
 
+  // useEffects
+  useEffect(() => {
     if (checkbox) {
       setAddress();
     } else {
@@ -109,6 +109,10 @@ const ServicePage = () => {
       dispatch(setAllTickets({newTicket, ...tickets}));
       serviceBooked(socket, newTicket);
       toast.success("Successfully booked!");
+      resetAddress();
+      setCheckbox(false);
+      setServiceImages(null);
+      setServiceDescription("");
     } catch (err) {
       // console.log("Error service booking:\n", err);
       toast.error(err.response.message.data);
@@ -250,7 +254,7 @@ const ServicePage = () => {
             Alternate Phone number <br />
             <input
               type="tel"
-              value={userAltPhoneNumber}
+              value={userAltPhoneNumber || ""}
               onChange={(e) => setUserAltPhoneNumber(e.target.value)}
             />
           </label>

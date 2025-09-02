@@ -2,13 +2,13 @@ const map = new Map(); // userId => socketId
 const revMap = new Map(); // socketId => userId
 const socketInit = (io) => {
   io.on("connection", (socket) => {
-    console.log("New socket connectd:", socket.id);
+    // console.log("New socket connectd:", socket.id);
 
     socket.on("register", (userId) => {
       map.set(userId, socket.id);
       revMap.set(socket.id, userId);
 
-      console.log(map);
+      // console.log(map);     
     });
 
     socket.on("register - admin", () => {
