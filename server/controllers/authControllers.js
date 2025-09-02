@@ -24,7 +24,7 @@ export const registerUser = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "None",
       })
       .status(201)
       .json({ message: "Registered successfully" });
@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "None",
       })
       .status(200)
       .json({ message: "Login successful" });
@@ -97,7 +97,7 @@ export const updateProfile = async (req, res) => {
 
 export const logoutUser = (req, res) => {
   res
-    .clearCookie("token", { httpOnly: true, secure: true, sameSite: "strict" })
+    .clearCookie("token", { httpOnly: true, secure: true, sameSite: "None" })
     .status(200)
     .json({ message: "Logged out successfully" });
 };
@@ -132,7 +132,7 @@ export const loginAdmin = async (req, res) => {
       .cookie("adminToken", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "None",
       })
       .status(200)
       .json({ message: "Login successful" });
@@ -160,7 +160,7 @@ export const logoutAdmin = (req, res) => {
     .clearCookie("adminToken", {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "None",
     })
     .status(200)
     .json({ message: "Logged out successfully" });
