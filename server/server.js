@@ -11,7 +11,7 @@ import authRoutes from './routes/authRoutes.js';
 import ticketRoutes from './routes/ticketRoutes.js';
 
 dotenv.config({ quiet: true });
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL];
 
 const app = express();
 const server = createServer(app);

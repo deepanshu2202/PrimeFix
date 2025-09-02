@@ -1,7 +1,7 @@
 import "./App.css";
 import { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
-import Loader from "./components/loader";
+import Loader from "./components/Loader";
 import { Toaster } from "react-hot-toast";
 import authLoader from "./utils/authLoader";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
