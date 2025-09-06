@@ -78,7 +78,8 @@
 .work-history-item-images-container {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  height: 120px;
+  height: fit-content;
+  max-height: 120px !important;
   padding: 0.4rem;
   display: flex;
   gap: 0.5rem;
@@ -111,7 +112,7 @@
   background: transparent;
 }
 
-.work-history-item-images-container span {
+.work-history-item-images-container img {
   flex: 0 0 100px;
   border-radius: 6px;
   background-color: #f1f1f1;
@@ -120,6 +121,7 @@
   justify-content: center;
   font-size: 0.85rem;
   color: #555;
+  height: 100px;
 }
 
 .work-history-item-head,

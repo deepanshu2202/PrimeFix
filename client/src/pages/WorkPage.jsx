@@ -31,13 +31,11 @@ const WorkPage = () => {
     try {
       const res = await updateAmount(data);
       const newTicket = res.data;
-      console.log("Updated successfull", newTicket);
+      // console.log("Updated successfull", newTicket);
       const updatedTickets = Object.values(tickets)
         .flat()
         .map((ticket) => {
-          return ticket._id === id
-            ? { ...ticket, status: "completed", charge: workAmount }
-            : ticket;
+          return ticket._id === id ? newTicket : ticket;
         });
 
       dispatch(setWorkTickets({ updatedTickets }));

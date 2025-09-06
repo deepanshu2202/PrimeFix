@@ -59,9 +59,9 @@ const Ticket = ({
       <p>{description}</p>
       {rootClicked && (
         <div className="ticket-images-container">
-          {photos.map((item, idx) => {
+          {photos && photos.length !== 0 ? photos.map((item, idx) => {
             return <img key={idx} src={item} alt="Image" />;
-          })}
+          }) : <p style={{textAlign:"center"}}>No Images</p>}
         </div>
       )}
 

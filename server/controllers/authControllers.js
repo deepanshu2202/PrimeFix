@@ -180,7 +180,6 @@ export const getAllUsers = async (req, res) => {
 
 export const promoteUser = async (req, res) => {
   const { userId, password } = req.body;
-  console.log("Passowrd for promoting:", password);
 
   try {
     const currUser = await User.findById(req.user._id);

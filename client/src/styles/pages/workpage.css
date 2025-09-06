@@ -1,11 +1,10 @@
-
 .workpage-root {
-    margin-top: 10vh;
-    height: 90vh;
-    padding: 0.5rem 0.8rem;
-    padding-bottom: 1rem;
-    background-color: var(--gray-bg);
-  animation: fadeIn 0.3s ease-in-out
+  /* margin-top: 10vh; */
+  height: 90vh;
+  padding: 0.5rem 0.8rem;
+  padding-bottom: 1rem;
+  background-color: var(--gray-bg);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -18,35 +17,36 @@
 }
 
 .workpage-head {
-    border: 1px solid rgb(0, 0, 0, 0.6);
-    width: fit-content;
-    display: flex;
+  border: 1px solid rgb(0, 0, 0, 0.6);
+  width: fit-content;
+  display: flex;
 }
 
 .workpage-head button {
-    padding: 0.4rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    transition: background 0.25s;
-    cursor: pointer;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  transition: background 0.25s;
+  cursor: pointer;
 }
 
 .workpage-active-btn {
-    background-color: var(--primary-bg);
-    color: #fff;
+  background-color: var(--primary-bg);
+  color: #fff;
 }
 
 .workpage-main {
-    height: 95%;
+  height: 95%;
 }
 
-.workpage-request-container, .workpage-history-container {
-    margin-top: 0.2rem;
-    height: 100%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    padding: 0.2rem;
+.workpage-request-container,
+.workpage-history-container {
+  margin-top: 0.2rem;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.2rem;
 }

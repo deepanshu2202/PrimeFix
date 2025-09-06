@@ -63,8 +63,6 @@ const Dashboard = () => {
     try {
       const res = await addWorker(data);
       const newTicket = res.data;
-      console.log("Worker added successfully!");
-      console.log("UpdatedTicket, ", newTicket);
       const updatedTickets = Object.values(requests)
         .flat()
         .map((ticket) =>

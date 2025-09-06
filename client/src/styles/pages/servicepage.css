@@ -5,7 +5,7 @@
   padding: 1rem;
   background: #f8f9fa;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-top: 11vh;
+  /* margin-top: 11vh; */
   background-color: #3d526d;
   animation: fadeIn 0.3s ease-in-out
 }

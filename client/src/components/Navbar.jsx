@@ -111,6 +111,13 @@ const Navbar = () => {
       )}
 
       <div className={`nav-actions-mobile ${sidebarIsOpen ? "open" : ""}`}>
+        <div className="nav-open-icon">
+          <GiHamburgerMenu
+            size={32}
+            className="nav-real-icon"
+            onClick={() => setSideBarIsOpen(false)}
+          />
+        </div>
         <div>
           <div className="nav-action-mobile-btn" onClick={() => navigate("/")}>
             Home
@@ -127,6 +134,14 @@ const Navbar = () => {
           >
             History
           </div>
+          {(role === "admin" || role === "worker") && (
+            <div
+              className="nav-action-mobile-btn"
+              onClick={() => navigate("/work")}
+            >
+              Work
+            </div>
+          )}
           <div
             className="nav-action-mobile-btn"
             onClick={() => navigate("/profile")}

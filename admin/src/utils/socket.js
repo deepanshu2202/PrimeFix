@@ -12,6 +12,11 @@ export const createSocket = () => {
 };
 
 export const socketInit = (socket) => {
+  socket.off("connect");
+  socket.off("Service Cancelled - to admin");
+  socket.off("Service Completed - to admin");
+  socket.off("New Service Booked - to admin");
+
   socket.on("connect", () => {
     socket.emit("register - admin");
   });

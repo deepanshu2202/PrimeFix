@@ -50,7 +50,7 @@ const Sidebar = () => {
         Feedbacks
       </div>
       <div className={activeLink === "cust" ? "active-location-link" : ""} val="cust" onClick={handleNavClick}>
-        Customers
+        Users
       </div>
       <div className="sidebar-logout-btn" onClick={() => setWIsOpen(true)}>
         logout

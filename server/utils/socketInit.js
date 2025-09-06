@@ -1,20 +1,42 @@
+import jwt from "jsonwebtoken";
+import cookie from "cookie";
+
 const map = new Map(); // userId => socketId
 const revMap = new Map(); // socketId => userId
+
 const socketInit = (io) => {
   io.on("connection", (socket) => {
-    // console.log("New socket connectd:", socket.id);
+    const cookies = cookie.parse(socket.handshake.headers.cookie || "");
+    const token = cookies.token;
+    const adminToken = cookies.adminToken;
 
-    socket.on("register", (userId) => {
+    // Disconnect immediately if no token
+    if (!token && !adminToken) return socket.disconnect();
+
+    let userId;
+    try {
+      if (token) {
+        userId = jwt.verify(token, process.env.JWT_SECRET).id;
+      }
+      if (adminToken) {
+        userId = jwt.verify(adminToken, process.env.JWT_SECRET).id;
+      }
+    } catch (err) {
+      return socket.disconnect(); // invalid token
+    }
+
+    // Register normal user
+    if (token) {
       map.set(userId, socket.id);
       revMap.set(socket.id, userId);
+    }
 
-      // console.log(map);     
-    });
-
-    socket.on("register - admin", () => {
+    // Register admin
+    if (adminToken) {
       socket.join("admins");
-    });
+    }
 
+    // --- Event handlers ---
     socket.on("New Service Booked - to server", (ticket) => {
       io.to("admins").emit("New Service Booked - to admin", ticket);
     });
@@ -24,29 +46,28 @@ const socketInit = (io) => {
     });
 
     socket.on("Worker Assigned - to server", (ticket) => {
-      console.log(
-        "Received worker assigned event from admins with ticket:",
-        ticket
-      );
       const clientId = map.get(ticket.customer.id);
       const workerId = map.get(ticket.worker.id);
-      io.to(clientId).emit("Worker Assigned - to client", ticket);
-      io.to(workerId).emit("Worker Assigned - to client (worker)", ticket);
-      console.log("WorkerId:", workerId, "\nClientId:", clientId);
+
+      if (clientId) io.to(clientId).emit("Worker Assigned - to client", ticket);
+      if (workerId)
+        io.to(workerId).emit("Worker Assigned - to client (worker)", ticket);
     });
 
     socket.on("Service Completed - to server", (ticket) => {
       io.to("admins").emit("Service Completed - to admin", ticket);
-      io.to(map.get(ticket.customer.id)).emit(
-        "Service Completed - to client",
-        ticket
-      );
+      const clientId = map.get(ticket.customer.id);
+      if (clientId)
+        io.to(clientId).emit("Service Completed - to client", ticket);
     });
 
+    // --- Cleanup on disconnect ---
     socket.on("disconnect", () => {
       const userId = revMap.get(socket.id);
-      map.delete(userId);
-      revMap.delete(socket.id);
+      if (userId) {
+        map.delete(userId);
+        revMap.delete(socket.id);
+      }
     });
   });
 };

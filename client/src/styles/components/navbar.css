@@ -1,6 +1,6 @@
 .nav-root {
-  position: fixed;
-  top: 0px;
+  position: sticky;
+  top: -2px;
   width: 100vw;
   z-index: 5;
 
@@ -12,6 +12,8 @@
   color: white;
   background-color: var(--primary-bg);
   transition: background-color ease-in-out 250ms;
+
+  min-height: 70px;
 }
 
 .nav-root.scrolled {
@@ -90,10 +92,10 @@
 
 .nav-actions-mobile {
   position: fixed;
-  top: 11vh;
-  right: -150px;
-  height: 89vh;
-  width: 150px;
+  top: 0px !important;
+  right: -100px;
+  height: 100% !important;
+  width: 100px;
 
   font-size: 1.5rem;
   background-color: inherit;
@@ -103,7 +105,18 @@
   justify-content: space-between;
   transition: right 0.5s;
   border-left: 1px solid white;
-  border-top: 1px solid white;
+
+  /* background-color: red; */
+}
+
+.nav-open-icon {
+  padding: 0.4rem;
+  /* background-color: red; */
+}
+
+.nav-real-icon {
+  margin-top: 0.7rem;
+  align-self: center;
 }
 
 .nav-actions-mobile div {
@@ -125,4 +138,11 @@
 
 .nav-actions-mobile.open {
   right: 0px;
+}
+
+@media (min-width: 300px) and (max-width: 430px) {
+  .nav-actions-mobile {
+    top: 10vh;
+    height: 90vh;
+  }
 }
