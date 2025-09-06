@@ -17,7 +17,7 @@ export const workLoader = async (args) => {
     const resData = res.data;
 
     // console.log(resData);
-    store.dispatch(setWorkTickets({resData}));
+    store.dispatch(setWorkTickets({updatedTickets:resData}));
     return { auth: authData, role };
   } catch (err) {
     console.log(err);

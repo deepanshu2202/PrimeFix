@@ -1,15 +1,15 @@
 .dashboard-root {
-    width: calc(100vw - 158px);
-    margin-left: 158px;
-    height: 100vh;
-    padding: 0.7rem 1rem;
-    background-color: var(--gray-bg);
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+  width: calc(100vw - 158px);
+  margin-left: 158px;
+  height: 100vh;
+  padding: 0.7rem 1rem;
+  background-color: var(--gray-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 
-    transition: margin 0.3s;
-  animation: fadeIn 0.3s ease-in-out
+  transition: margin 0.3s;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -22,78 +22,79 @@
 }
 
 .dashboard-nav {
-    height: fit-content;
-    background-color: var(--primary-bg);
-    text-align: center;
-    color: #fff;
-    padding: 0.3rem 0;
-    border-top-left-radius: 0.6rem;
-    border-top-right-radius: 0.6rem;
+  height: fit-content;
+  background-color: var(--primary-bg);
+  text-align: center;
+  color: #fff;
+  padding: 0.3rem 0;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
 }
 
 .dashboard-head {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: #fff;
-    border-radius: 0.4rem;
-    padding: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  padding: 0.4rem;
 }
 
 .dashboard-head div {
-    border: 1px solid rgb(0, 0, 0, 0.4);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.35rem;
-    cursor: pointer;
-    transition: background 0.25s;
+  border: 1px solid rgb(0, 0, 0, 0.4);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: background 0.25s;
 }
 
 .dashboard-nav-updating-worker {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: #fff;
-    border-radius: 0.4rem;
-    padding: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  padding: 0.4rem;
 }
 
 .dashboard-nav-updating-worker button {
-    border: 1px solid rgb(0, 0, 0, 0.4);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.35rem;
-    cursor: pointer;
-    transition: background 0.25s;
-    font-size: 1rem;
+  border: 1px solid rgb(0, 0, 0, 0.4);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: background 0.25s;
+  font-size: 1rem;
 }
 
 .active-dash-filter-btn {
-    background-color: var(--primary-bg);
-    color: white;
-    border: none !important;
+  background-color: var(--primary-bg);
+  color: white;
+  border: none !important;
 }
 
 .dashboard-nav-updating-worker input {
-    border: 1px solid rgb(0, 0, 0, 0.4);
-    padding: 0.4rem;
-    border-radius: 0.35rem;
+  border: 1px solid rgb(0, 0, 0, 0.4);
+  padding: 0.4rem;
+  border-radius: 0.35rem;
 }
 
 .cancel-adding-worker {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .dashboard-nav-updating-worker input:focus {
-    outline: none;
+  outline: none;
 }
 
 .request-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    overflow-y: auto;
-    animation: fadeIn 0.3s ease-in-out
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -105,9 +106,8 @@
   }
 }
 
-
 .request-update-container {
-  animation: fadeIn 0.3s ease-in-out
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -128,18 +128,18 @@
 }
 
 .active-filter-btn {
-    border: none !important;
-    background-color: var(--primary-bg);
-    color: #fff;
+  border: none !important;
+  background-color: var(--primary-bg);
+  color: #fff;
 }
 
 @media (max-width: 640px) {
-    .dashboard-root {
-        width: 100%;
-        margin-left: 0;
-    }
+  .dashboard-root {
+    width: 100%;
+    margin-left: 0;
+  }
 
-    .dash-h3s {
-        display: none;
-    }
+  .dash-h3s {
+    display: none;
+  }
 }

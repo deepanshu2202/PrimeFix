@@ -36,6 +36,8 @@ const socketInit = (io) => {
       socket.join("admins");
     }
 
+    // console.log(map);
+
     // --- Event handlers ---
     socket.on("New Service Booked - to server", (ticket) => {
       io.to("admins").emit("New Service Booked - to admin", ticket);
@@ -46,12 +48,14 @@ const socketInit = (io) => {
     });
 
     socket.on("Worker Assigned - to server", (ticket) => {
+      console.log(map);
       const clientId = map.get(ticket.customer.id);
       const workerId = map.get(ticket.worker.id);
 
       if (clientId) io.to(clientId).emit("Worker Assigned - to client", ticket);
-      if (workerId)
-        io.to(workerId).emit("Worker Assigned - to client (worker)", ticket);
+      if (workerId) io.to(workerId).emit("Worker Assigned - to client (worker)", ticket);
+      
+      socket.to("admins").emit("Worker Assigned - to admin", ticket);
     });
 
     socket.on("Service Completed - to server", (ticket) => {
@@ -60,6 +64,10 @@ const socketInit = (io) => {
       if (clientId)
         io.to(clientId).emit("Service Completed - to client", ticket);
     });
+
+    socket.on("New User Registered - to server", (user) => {
+      io.to("admins").emit("New User Registered - to admin", user);
+    })
 
     // --- Cleanup on disconnect ---
     socket.on("disconnect", () => {

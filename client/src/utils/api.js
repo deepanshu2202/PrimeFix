@@ -12,6 +12,7 @@ export const logoutUser = async () => await api.get("/auth/logout");
 export const loginUser = async (data) => await api.post("/auth/login", data);
 export const signUpUser = async (data) => await api.post("/auth/register", data);
 export const updateProfile = async (data) => await api.put("auth/me", data);
+export const updatePassword = async (data) => await api.put("/auth/pass", data);
 
 // ticket
 export const bookTicket = async (data) =>

@@ -38,12 +38,77 @@
 }
 
 .profile-empty-space {
-  height: 100px;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
   border-radius: 0.4rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  flex: 1;
+}
+
+.profile-empty-space input {
+  width: 100%;
+}
+
+.change-pass-opener {
+  padding: 12px;
+  width: 100%;
+  background: var(--primary-bg);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.change-pass-opener:hover {
+  background: #283e5a;
+}
+
+.change-pass-container {
+  /* border: 1px solid black; */
+  flex-direction: column;
+  width: 100%;
+}
+
+/* .change-pass-container-actions {
+  border: 1px solid red;
+} */
+
+.change-pass-container-actions button {
+  padding: 12px;
+  width: 100%;
+  background: var(--primary-bg);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.change-pass-container-actions button:first-child {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.change-pass-container-actions button:first-child:hover {
+  background-color: #27ae60;
+  transform: scale(1.01);
+}
+
+.change-pass-container-actions button:last-child {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.change-pass-container-actions button:last-child:hover {
+  background-color: #c0392b;
+  transform: scale(1.01);
 }
 
 .profile-address-container {

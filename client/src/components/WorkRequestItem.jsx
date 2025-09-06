@@ -20,7 +20,6 @@ const WorkRequestItem = ({
   const [rootClicked, setRootClicked] = useState(false);
 
   const handleUpdateClick = async (e) => {
-    console.log("update button clicked!");
     setRootClicked(true);
     await updateFunction(e, id);
   };

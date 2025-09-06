@@ -15,10 +15,8 @@ const authLoader = async () => {
       const currAllTickets = resTicket.data;
 
       store.dispatch(setUser({ currUser }));
-      store.dispatch(setAllUsers({ currAllUsers }));
-      store.dispatch(setAllTickets({ currAllTickets }));
-
-      // console.log("Curr All Tickets:\n", currAllTickets);
+      store.dispatch(setAllUsers({ updatedUsers: currAllUsers }));
+      store.dispatch(setAllTickets({ updatedTickets: currAllTickets }));
     } catch (err) {
       console.log("Error:", err);
       throw redirect("/login");

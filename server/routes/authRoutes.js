@@ -10,6 +10,7 @@ import {
   promoteUser,
   registerUser,
   updateProfile,
+  updatePassword
 } from "../controllers/authControllers.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import authMiddlewareAdmin from "../middlewares/authMiddlewareAdmin.js";
@@ -21,6 +22,7 @@ router.post("/register", registerUser);
 router.get("/me", authMiddleware, getProfile);
 router.put("/me", authMiddleware, updateProfile);
 router.get("/logout", authMiddleware, logoutUser);
+router.put("/pass", authMiddleware, updatePassword);
 
 router.post("/login-admin", loginAdmin);
 router.get("/me-admin", authMiddlewareAdmin, getAdmin);

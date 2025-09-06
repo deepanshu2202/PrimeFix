@@ -5,8 +5,8 @@ const initialState = {
     id: "1",
     title: "Plumbing Services",
   },
-  allTickets: null,
-  workTickets: null,
+  allTickets: [],
+  workTickets: [],
   socketMeta: {
     connected: false,
   },
@@ -21,12 +21,23 @@ export const globalSlice = createSlice({
       state.selectedService.title = action.payload.title;
     },
     setAllTickets: (state, action) => {
-      state.allTickets = action.payload;
+      const { newTicket, updatedTickets } = action.payload;
+
+      if (newTicket) {
+        state.allTickets = [newTicket, ...state.allTickets]; 
+      } else {
+        state.allTickets = updatedTickets;
+      }
     },
     setWorkTickets: (state, action) => {
-      state.workTickets = action.payload;
+      const { newTicket, updatedTickets } = action.payload;
+
+      if (newTicket) {
+        state.workTickets = [newTicket, ...state.workTickets]; 
+      } else {
+        state.workTickets = updatedTickets;
+      }
     },
-    // Optional: update socket metadata instead of raw socket
     setSocketMeta: (state, action) => {
       state.socketMeta = { ...state.socketMeta, ...action.payload };
     },

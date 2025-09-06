@@ -25,29 +25,24 @@ export const socketInit = (socket) => {
   socket.on("Worker Assigned - to client", (newTicket) => {
     const tickets = store.getState().global.allTickets;
 
-    const updatedTicket = Object.values(tickets)
+    const updatedTickets = Object.values(tickets)
       .flat()
-      .map((ticket) =>
-        ticket._id === newTicket._id
-          ? { ...newTicket, status: "inProgress" }
-          : ticket
-      );
+      .map((ticket) => (ticket._id === newTicket._id ? newTicket : ticket));
 
-    store.dispatch(setAllTickets({ updatedTicket }));
+    store.dispatch(setAllTickets({ updatedTickets }));
   });
 
   socket.on("Worker Assigned - to client (worker)", (newTicket) => {
-    const workTickets = store.getState().global.workTickets;
-    store.dispatch(setWorkTickets({ newTicket, ...workTickets }));
+    store.dispatch(setWorkTickets({ newTicket }));
   });
 
   socket.on("Service Completed - to client", (newTicket) => {
     const tickets = store.getState().global.allTickets;
 
-    const updatedTicket = Object.values(tickets)
+    const updatedTickets = Object.values(tickets)
       .flat()
       .map((ticket) => (ticket._id === newTicket._id ? newTicket : ticket));
-    store.dispatch(setAllTickets({ updatedTicket }));
+    store.dispatch(setAllTickets({ updatedTickets }));
   });
 };
 
@@ -65,3 +60,8 @@ export const serviceCancelled = (socket, ticket) => {
   const event = "Service Cancelled - to server";
   socket.emit(event, ticket);
 };
+
+export const newUserRegistered = (socket, user) => {
+  const event = "New User Registered - to server";
+  socket.emit(event, user);
+}
