@@ -106,7 +106,7 @@ const ServicePage = () => {
     try {
       const res = await bookTicket(formData);
       const newTicket = res.data;
-      dispatch(setAllTickets({newTicket, ...tickets}));
+      dispatch(setAllTickets({newTicket, tickets}));
       serviceBooked(socket, newTicket);
       toast.success("Successfully booked!");
       resetAddress();

@@ -14,7 +14,6 @@ const HistoryPage = () => {
   const socket = useSocket();
   const dispatch = useDispatch();
 
-
   const [currId, setCurrId] = useState(""); 
   const [event, setEvent] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -139,7 +138,6 @@ const HistoryPage = () => {
             description={ticket.description}
             date={new Date(ticket.createdAt).toLocaleString()}
             worker={ticket.worker}
-            // handleCancelClick={handleCancelClick}
             handleCancelClick={handlePreCancel}
           />
         })}

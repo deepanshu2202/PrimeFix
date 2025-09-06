@@ -10,7 +10,6 @@ const socketInit = (io) => {
     const token = cookies.token;
     const adminToken = cookies.adminToken;
 
-    // Disconnect immediately if no token
     if (!token && !adminToken) return socket.disconnect();
 
     let userId;
@@ -22,21 +21,18 @@ const socketInit = (io) => {
         userId = jwt.verify(adminToken, process.env.JWT_SECRET).id;
       }
     } catch (err) {
-      return socket.disconnect(); // invalid token
+      return socket.disconnect();
     }
 
-    // Register normal user
     if (token) {
       map.set(userId, socket.id);
       revMap.set(socket.id, userId);
     }
 
-    // Register admin
     if (adminToken) {
       socket.join("admins");
     }
 
-    // --- Event handlers ---
     socket.on("New Service Booked - to server", (ticket) => {
       io.to("admins").emit("New Service Booked - to admin", ticket);
     });
@@ -50,8 +46,9 @@ const socketInit = (io) => {
       const workerId = map.get(ticket.worker.id);
 
       if (clientId) io.to(clientId).emit("Worker Assigned - to client", ticket);
-      if (workerId)
-        io.to(workerId).emit("Worker Assigned - to client (worker)", ticket);
+      if (workerId) io.to(workerId).emit("Worker Assigned - to client (worker)", ticket);
+      
+      socket.to("admins").emit("Worker Assigned - to admin", ticket);
     });
 
     socket.on("Service Completed - to server", (ticket) => {
@@ -61,7 +58,10 @@ const socketInit = (io) => {
         io.to(clientId).emit("Service Completed - to client", ticket);
     });
 
-    // --- Cleanup on disconnect ---
+    socket.on("New User Registered - to server", (user) => {
+      io.to("admins").emit("New User Registered - to admin", user);
+    })
+
     socket.on("disconnect", () => {
       const userId = revMap.get(socket.id);
       if (userId) {

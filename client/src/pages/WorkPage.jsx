@@ -31,7 +31,6 @@ const WorkPage = () => {
     try {
       const res = await updateAmount(data);
       const newTicket = res.data;
-      // console.log("Updated successfull", newTicket);
       const updatedTickets = Object.values(tickets)
         .flat()
         .map((ticket) => {
@@ -43,7 +42,6 @@ const WorkPage = () => {
       serviceCompleted(socket, newTicket);
       toast.success("Updated successfully");
     } catch (err) {
-      // console.log(err);
       toast.err(err.response.data.message);
     }
   };

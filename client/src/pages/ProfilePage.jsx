@@ -6,8 +6,8 @@ import "../styles/pages/profilepage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/slice/userSlice";
 
-import { updateProfile } from "../utils/api";
-import { toast } from 'react-hot-toast';
+import { updatePassword, updateProfile } from "../utils/api";
+import { toast } from "react-hot-toast";
 import ConfirmWindow from "../components/ConfirmWindow";
 
 const ProfilePage = () => {
@@ -16,6 +16,8 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
 
   const [event, setEvent] = useState(null);
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [userCity, setUserCity] = useState("");
   const [username, setUsername] = useState("");
@@ -23,6 +25,7 @@ const ProfilePage = () => {
   const [cityPincode, setCityPincode] = useState("");
   const [userAddress, setUserAddress] = useState("");
   const [userCountry, setUserCountry] = useState("");
+  const [passChanging, setPassChanging] = useState(false);
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [userAltPhoneNumber, setUserAltPhoneNumber] = useState("");
 
@@ -38,11 +41,11 @@ const ProfilePage = () => {
       phone: userPhoneNumber || userSavedAddress.phone,
       pincode: cityPincode || userSavedAddress.pincode,
       altPhone: userAltPhoneNumber || userSavedAddress.altPhone,
-    }
+    };
 
     try {
-      await updateProfile({name: username, address: newAddress});
-      dispatch(setUser({name: username, address: newAddress}));
+      await updateProfile({ name: username, address: newAddress });
+      dispatch(setUser({ name: username, address: newAddress }));
       toast.success("Details updated successfully");
       setUserCity("");
       setUserState("");
@@ -52,7 +55,6 @@ const ProfilePage = () => {
       setUserCountry("");
       setUserPhoneNumber("");
       setUserAltPhoneNumber("");
-
     } catch (err) {
       toast.error(err.response.data.message);
     } finally {
@@ -63,6 +65,24 @@ const ProfilePage = () => {
   const handleFormSubmit = (e) => {
     setIsOpen(true);
     setEvent(e);
+  };
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    if (newPass.length < 6) {
+      toast.error("Password should atleast contain 6 characters");
+      return;
+    }
+
+    const data = {oldPass, newPass}
+    try {
+      await updatePassword(data);
+      toast.success("Password changed successfully");
+    } catch (err) {
+      toast.error(err.response.data.message);
+    } finally {
+      setPassChanging(false);
+    }
   }
 
   return (
@@ -85,7 +105,25 @@ const ProfilePage = () => {
             <input type="text" value={user.email} readOnly />
           </label>
 
-          <div className="profile-empty-space"></div>
+          <div className="profile-empty-space">
+            {!passChanging ? (
+              <button
+                className="change-pass-opener"
+                onClick={() => setPassChanging(true)}
+              >
+                Change password
+              </button>
+            ) : (
+              <div className="change-pass-container">
+                <input type="password" placeholder="Enter Old Password" onChange={(e) => setOldPass(e.target.value)}/>
+                <input type="password" placeholder="Enter New Password" onChange={(e) => setNewPass(e.target.value)}/>
+                <div className="change-pass-container-actions">
+                  <button onClick={handlePasswordChange}>Change</button>
+                  <button onClick={() => setPassChanging(false)}>Cancel</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="profile-address-container">
@@ -167,13 +205,13 @@ const ProfilePage = () => {
             Update profile
           </span>
         </div>
-      <ConfirmWindow isOpen={isOpen} setIsOpen={setIsOpen} 
-        message="Do you want to save the changes to your profile?" 
-        confirmFunction={handleSubmit} 
-      />
+        <ConfirmWindow
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          message="Do you want to save the changes to your profile?"
+          confirmFunction={handleSubmit}
+        />
       </div>
-
-
     </div>
   );
 };

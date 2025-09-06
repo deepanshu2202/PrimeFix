@@ -19,18 +19,18 @@ const Dashboard = () => {
   const [toggleSearchWorkerName, setToggleSearchWorkerName] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(
+  const [filteredUsers, setFilteredUsers] = useState(users ?
     Object.values(users)
       .flat()
-      .filter((user) => user.role === "worker")
+      .filter((user) => user.role === "worker") : []
   );
 
   const filteredRequests =
     selectedFilter === ""
       ? requests
-      : Object.values(requests)
+      : requests ? Object.values(requests)
           .flat()
-          .filter((item) => item.status === selectedFilter);
+          .filter((item) => item.status === selectedFilter) : [];
 
   const handleUpdate = (ticketId) => {
     setSelectedTicketId(ticketId);
@@ -52,7 +52,7 @@ const Dashboard = () => {
     );
   };
 
-  const handleAddWorker = async (e, id, password, name, email, address) => {
+  const handleAddWorker = async (e, id, password) => {
     e.preventDefault();
     const data = {
       password: password,
@@ -66,19 +66,8 @@ const Dashboard = () => {
       const updatedTickets = Object.values(requests)
         .flat()
         .map((ticket) =>
-          ticket._id === selectedTicketId
-            ? {
-                ...ticket,
-                status: "inProgress",
-                worker: {
-                  id,
-                  name,
-                  email,
-                  phone: address.phone,
-                },
-              }
-            : ticket
-        );
+          ticket._id === newTicket._id ? newTicket : ticket );
+
       dispatch(setAllTickets({ updatedTickets }));
       setIsUpdating(false);
       workerAssigned(socket, newTicket);
@@ -88,6 +77,8 @@ const Dashboard = () => {
       toast.error(err.response.data.message);
     }
   };
+
+  // const handleLog = () => {}
 
   useEffect(() => {
     setFilteredUsers(
@@ -152,6 +143,9 @@ const Dashboard = () => {
           >
             Cancelled
           </div>
+
+          {/* <div onClick={handleLog}>LOG</div> */}
+
         </div>
       ) : (
         <div className="dashboard-nav-updating-worker">

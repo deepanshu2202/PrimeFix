@@ -4,8 +4,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "../utils/api";
 import toast from "react-hot-toast";
+import { useSocket } from './../context/useSocket';
+import { newUserRegistered } from "../utils/socket";
 
 const SignUpPage = () => {
+  const socket = useSocket();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,9 +31,11 @@ const SignUpPage = () => {
 
     try {
       const data = {name, email, password};
-      await signUpUser(data);
+      const res = await signUpUser(data);
+      const newUser = res.data.user;
       navigate('/');
       toast.success("Account created successfully");
+      newUserRegistered(socket, newUser);
     } catch (err) {
       const msg = err.response.data.message;
       // console.log("SignUpError: ", err.response);

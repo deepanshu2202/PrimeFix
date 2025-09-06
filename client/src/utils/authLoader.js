@@ -25,7 +25,7 @@ const authLoader = async () => {
         })
       );
 
-      store.dispatch(setAllTickets({ tickets }));
+      store.dispatch(setAllTickets({ updatedTickets: tickets }));
     } catch (err) {
       const bool = false;
       if (bool) console.log(err);
