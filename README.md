@@ -1,38 +1,37 @@
-# MERN Project
+# PrimeFix – MERN Service Booking Platform
 
-This is a **MERN stack application** consisting of three parts:  
-- **Server** – Express.js + MongoDB backend with authentication and real-time socket connections.  
-- **Admin** – React-based admin dashboard for managing data and users.  
-- **Client** – React-based client-side application for end users.  
+PrimeFix is a **MERN stack application** for booking home services.
+Users can book services (plumbing, electrical, cleaning, shifting, etc.) through the client app, while admins manage requests, assign workers, and update service charges from the admin dashboard.
 
 ---
 
 ## 📂 Project Structure
+
 ```
-
 .
-├── admin/     # React Admin Dashboard
-├── client/    # React Client Application
+├── admin/     # React Admin Dashboard (manage bookings, users, workers)
+├── client/    # React Client App (service booking platform)
 ├── server/    # Express.js Server & API
-
-````
+```
 
 ---
 
 ## 🚀 Tech Stack
-- **Frontend:** React, Redux Toolkit, React Router, React Icons, Socket.io Client, Axios  
-- **Backend:** Node.js, Express.js, MongoDB, Mongoose, Socket.io, JWT, Bcrypt, Multer, Cloudinary  
-- **Tools:** Vite, ESLint, Nodemon, dotenv  
+
+* **Frontend:** React, Redux Toolkit, React Router, React Icons, Socket.io Client, Axios
+* **Backend:** Node.js, Express.js, MongoDB, Mongoose, Socket.io, JWT, Bcrypt, Multer, Cloudinary
+* **Tools:** Vite, ESLint, Nodemon, dotenv
 
 ---
 
 ## ⚙️ Installation & Setup
 
 ### 1. Clone the Repository
+
 ```bash
-git clone <your-repo-url>
-cd <project-folder>
-````
+git clone https://github.com/deepanshu2202/PrimeFix.git
+cd PrimeFix
+```
 
 ### 2. Install Dependencies
 
@@ -108,7 +107,7 @@ npm run dev
 
 ## 🔑 Environment Variables
 
-Create a `.env` file inside the **server** directory with:
+### Server `.env`
 
 ```env
 PORT=5000
@@ -119,7 +118,7 @@ CLOUDINARY_API_KEY=your_cloudinary_key
 CLOUDINARY_API_SECRET=your_cloudinary_secret
 ```
 
-For **Admin** and **Client**, create a `.env` file for Vite:
+### Client / Admin `.env`
 
 ```env
 VITE_API_URL=http://localhost:5000
@@ -129,8 +128,10 @@ VITE_API_URL=http://localhost:5000
 
 ## 📌 Features
 
-* 🔒 JWT-based Authentication
-* 📂 File Upload with Multer & Cloudinary
+* 🛠️ Book home services from client app
+* 🧑‍💼 Admin dashboard to manage bookings & customers
+* 🔒 JWT-based Authentication & Authorization
+* 📂 File Uploads with Multer & Cloudinary
 * ⚡ Real-time updates with Socket.io
 * 🗄️ MongoDB database with Mongoose models
 * 🎨 Modern UI with React + Redux Toolkit
@@ -144,5 +145,5 @@ VITE_API_URL=http://localhost:5000
 3. Commit your changes
 4. Push and create a PR
 
-Do you want me to now also prepare **separate lightweight README.md files** for `server`, `admin`, and `client` folders (with only their setup instructions), or just keep this single root-level README?
-```
+---
+
